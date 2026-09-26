@@ -1,0 +1,206 @@
+/* SPEAKING — Listen and Repeat (7 phrases de difficulté croissante) + Take an Interview (4 questions, 45 s) */
+CONTENT.rep = [
+  { id: 'r01', g: 'W', ctx: 'You are training to work at the front desk of the university library. Listen to the head librarian and repeat what she says.', s: [
+    'The library opens at eight.',
+    'Please show your student card at the entrance.',
+    'Laptops can be borrowed for up to four hours.',
+    'Group study rooms must be booked at least one day in advance.',
+    'If you lose a book, you\'ll be asked to pay for a replacement copy.',
+    'Students who return materials late won\'t be able to borrow anything else until the fine is paid.',
+    'Although most journals are available online, some older issues can only be consulted in the reading room on the third floor.'] },
+  { id: 'r02', g: 'M', ctx: 'You are a new guide at a science museum. Listen to your manager and repeat what he says.', s: [
+    'Welcome to the science museum.',
+    'The tour starts in the main hall.',
+    'Please don\'t touch the fossils in the glass cases.',
+    'The planetarium show begins every hour on the hour.',
+    'Visitors who need a wheelchair can ask for one at the information desk.',
+    'The dinosaur skeleton you\'re looking at was discovered by a group of students in nineteen ninety-two.',
+    'If you\'d like to learn more about the exhibition, you can download our free app, which includes interviews with the researchers.'] },
+  { id: 'r03', g: 'W', ctx: 'You are helping at a welcome session for new international students. Listen to the coordinator and repeat what she says.', s: [
+    'Welcome to campus, everyone.',
+    'Your student ID is in the envelope.',
+    'The shuttle to the city center leaves every twenty minutes.',
+    'You need to register with the health center before the end of the month.',
+    'Anyone who hasn\'t opened a bank account yet should bring their passport tomorrow.',
+    'The language exchange program pairs you with a local student who wants to practice your language.',
+    'Should you have any questions about your visa, the international office is open every weekday except Wednesday afternoon.'] },
+  { id: 'r04', g: 'M', ctx: 'You are an intern at an investment firm. Listen to your supervisor and repeat what he says.', s: [
+    'The meeting starts at nine sharp.',
+    'Please send me the report by noon.',
+    'Our clients expect clear and accurate information.',
+    'The quarterly results will be published next Thursday morning.',
+    'We need to check whether the figures match those in last year\'s annual report.',
+    'Before you contact any client, make sure you\'ve read the compliance guidelines carefully.',
+    'Had the market reacted more strongly to the announcement, we would have had to revise our forecasts for the entire year.'] },
+  { id: 'r05', g: 'W', ctx: 'You are learning to work as an assistant in a university biology lab. Listen to the lab manager and repeat what she says.', s: [
+    'Always wear your goggles.',
+    'The samples are kept in the fridge.',
+    'Label every test tube with the date and your name.',
+    'Wash your hands before and after each experiment.',
+    'If a chemical spills on the floor, tell a supervisor immediately.',
+    'The microscopes on the left are reserved for the graduate students this semester.',
+    'Results that haven\'t been recorded in the shared notebook can\'t be used in any publication, however promising they may seem.'] },
+  { id: 'r06', g: 'M', ctx: 'You are volunteering at a city tourist office. Listen to the office manager and repeat what he says.', s: [
+    'Good morning, how can I help?',
+    'The old town is a short walk from here.',
+    'Maps are free, but guided tours cost ten euros.',
+    'The castle is closed on Mondays for maintenance.',
+    'Tickets for the boat tour can be bought online or at the harbor.',
+    'Visitors staying more than three days usually buy the city pass, which includes public transport.',
+    'The cathedral, which took nearly two centuries to complete, is considered one of the finest examples of Gothic architecture in the region.'] },
+  { id: 'r07', g: 'W', ctx: 'You are training to work at a university career center. Listen to the career advisor and repeat what she says.', s: [
+    'Please take a seat.',
+    'Bring a printed copy of your CV.',
+    'Most interviews last about thirty minutes.',
+    'Employers often ask why you chose your field of study.',
+    'It\'s a good idea to research the company before your interview.',
+    'Candidates who ask thoughtful questions at the end usually leave a stronger impression.',
+    'Even if you don\'t get an offer, asking for feedback can help you understand what to improve for your next application.'] },
+  { id: 'r08', g: 'M', ctx: 'You are working at the reception of a campus sports center. Listen to the manager and repeat what he says.', s: [
+    'The gym is open until ten.',
+    'Towels are available at the desk.',
+    'You must book tennis courts in advance.',
+    'New members get a free fitness assessment.',
+    'The swimming pool will be closed on Saturday for a competition.',
+    'Students can join any of our classes without paying an extra fee this semester.',
+    'Members who fail to cancel a booking at least two hours beforehand may lose the right to reserve courts for a week.'] },
+  { id: 'r09', g: 'W', ctx: 'You are an orientation leader showing new students around the business school. Listen to the program director and repeat what she says.', s: [
+    'This is the main lecture hall.',
+    'Classes begin on Monday morning.',
+    'The trading room is on the ground floor.',
+    'You can access the financial databases from any campus computer.',
+    'Group projects account for a significant part of your final grade.',
+    'Students who plan to study abroad should meet their advisor during the first term.',
+    'The case competition, which attracts teams from all over Europe, gives students the chance to present their ideas to senior executives.'] },
+  { id: 'r10', g: 'M', ctx: 'You are helping at an academic conference. Listen to the event organizer and repeat what he says.', s: [
+    'Registration is on your right.',
+    'Coffee will be served at ten thirty.',
+    'Speakers should upload their slides before the session.',
+    'The keynote address has been moved to the main auditorium.',
+    'Please remind participants to switch their phones to silent mode.',
+    'Anyone presenting in the afternoon should check the equipment during the lunch break.',
+    'Due to the unexpectedly high number of participants, some of the workshops will be repeated tomorrow morning in the smaller seminar rooms.'] },
+];
+
+CONTENT.int = [
+  { id: 'i01', g: 'W', topic: 'Study habits', ctx: 'You have agreed to take part in a research study about how university students study. You will have a short online interview with a researcher.', q: [
+    'First, could you tell me a little about where you usually study and why you like studying there?',
+    'Do you prefer studying alone or with other people? Why?',
+    'Some people say that students today are more easily distracted than students in the past. Do you agree? Why or why not?',
+    'If your university could change one thing to help students study more effectively, what should it be, and how would it help?'],
+    m: [
+      'I usually study in the university library, on the quiet floor. The main reason is that I can\'t really focus at home — there\'s always something to do, like cooking or checking my phone. In the library, everyone around me is working, so it creates a kind of positive pressure. Plus, I have access to all the databases I need for my finance courses.',
+      'It honestly depends on the task. For learning new material or doing problem sets, I much prefer working alone, because I can go at my own pace. But before an exam, I find it really useful to study with one or two classmates. Explaining a concept to someone else is the best way to check whether I\'ve actually understood it.',
+      'I\'d say yes, to some extent. Students in the past had distractions too, but smartphones are designed to capture our attention constantly, with notifications every few minutes. That said, I don\'t think it\'s inevitable — personally, I put my phone in airplane mode when I study, and it makes a huge difference.',
+      'I think the university should offer more short, practical workshops on study techniques, like spaced repetition or active recall. Most students were never taught how to study; we just reread our notes, which research shows is quite ineffective. A few hours of training in the first year could save students a lot of time and stress later on.'] },
+  { id: 'i02', g: 'M', topic: 'Technology in daily life', ctx: 'You are participating in a study on how young adults use technology. A researcher will ask you some questions.', q: [
+    'What piece of technology do you use most in your daily life, and what do you use it for?',
+    'Has technology changed the way you communicate with your family? Please explain.',
+    'Some people think children should not have smartphones until they are teenagers. What is your opinion?',
+    'In the future, do you think artificial intelligence will make work easier or more stressful for people? Why?'],
+    m: [
+      'Without a doubt, my smartphone. I use it for almost everything: messaging, checking the news, managing my bank account and even studying, since I use a flashcard app for vocabulary. It\'s basically my calendar, my wallet and my library at the same time.',
+      'Yes, a lot. My brother lives abroad, and a few years ago we only spoke on birthdays. Now we have a family group chat, so we share small moments every day — photos, jokes, news. I\'d say it has made our relationship much more natural, even though we\'re in different countries.',
+      'I mostly agree. Smartphones give children access to social media, which can affect their self-esteem, and they make it harder to concentrate. However, I think a simple phone for calls and messages can be useful for safety. So the problem isn\'t the device itself, but the unlimited access to apps.',
+      'I think it will do both, depending on the job. AI will remove a lot of repetitive tasks, like data entry, which is great. But it will also raise expectations — if you can produce a report in one hour instead of five, your manager may expect five reports. So workers will need to learn to use AI strategically, not just faster.'] },
+  { id: 'i03', g: 'W', topic: 'Work and careers', ctx: 'You have volunteered for a research project on students\' career plans. The researcher will ask you four questions.', q: [
+    'What kind of job would you like to have in ten years?',
+    'What experience or skills have prepared you for this career so far?',
+    'Is it better to stay with one company for a long time or to change jobs regularly early in your career? Why?',
+    'Some people believe that a high salary is the most important factor when choosing a job. Do you agree? Please explain your opinion.'],
+    m: [
+      'In ten years, I\'d like to be working in mergers and acquisitions, ideally as a vice president in an investment bank or a private equity fund. I\'m fascinated by the strategic side of finance — understanding why two companies should combine and how to value that decision.',
+      'My business studies gave me a solid foundation in accounting and corporate finance. But what prepared me most was probably my internship in a small advisory firm, where I built valuation models for real clients. It taught me to be rigorous, because a single mistake in a spreadsheet could change the whole recommendation.',
+      'I think changing jobs once or twice early on is actually beneficial. You get exposure to different industries and cultures, and you build a broader network. That said, changing too often can look unstable to recruiters, so I\'d say staying at least two or three years in each position is a good balance.',
+      'I don\'t fully agree. A good salary obviously matters, especially at the beginning, when you might have student loans. But in the long run, what keeps people motivated is learning, a good team and a sense that their work is meaningful. If you\'re miserable, even a high salary won\'t compensate for very long.'] },
+  { id: 'i04', g: 'M', topic: 'Cities and transport', ctx: 'You are taking part in a survey about urban life for a university research group. The interviewer will ask you some questions.', q: [
+    'How do you usually get around in the city where you live?',
+    'What is one thing you would change about public transportation in your city?',
+    'Some cities have made public transport completely free. Do you think this is a good idea? Why?',
+    'Do you think more people will live in big cities or in smaller towns in the future? Explain your answer.'],
+    m: [
+      'Most of the time I take the metro, because it\'s fast and there\'s a station five minutes from my apartment. When the weather is nice, though, I prefer cycling — it\'s free, it\'s good exercise, and honestly it\'s often quicker than the metro for short distances.',
+      'I\'d improve the service at night. Right now, the last metro leaves around half past midnight, and after that the only options are night buses, which are slow and not very frequent. For students and people who work late, a metro running all night on weekends would make a real difference.',
+      'It\'s an interesting idea, but I\'m not completely convinced. It definitely encourages people to leave their cars at home, and it helps low-income households. The problem is funding: if the system loses ticket revenue, it may have less money to invest in new lines and maintenance. Maybe making it free only for students and the unemployed would be a better compromise.',
+      'I think big cities will keep growing, because that\'s where most jobs and universities are. However, remote work has changed things a little. Some people now choose smaller towns with a lower cost of living and only commute a couple of days a week. So I expect a mix: big cities remain central, but medium-sized towns nearby will become more attractive.'] },
+  { id: 'i05', g: 'W', topic: 'Travel and culture', ctx: 'You are participating in a study about international experiences. A researcher will interview you.', q: [
+    'Tell me about a place you have visited that you found especially interesting.',
+    'When you travel, do you prefer to plan everything in advance or to be spontaneous? Why?',
+    'Some people say that living abroad is the best way to learn about another culture. Do you agree?',
+    'How do you think tourism affects local communities, both positively and negatively?'],
+    m: [
+      'Last summer I went to Lisbon, and I was really struck by it. The city is built on hills, so every street has a different view of the river. What I found most interesting was the mix of history and modern start-up culture — you can visit a sixteenth-century monastery in the morning and a co-working space full of entrepreneurs in the afternoon.',
+      'I\'m somewhere in between. I always book my transport and accommodation in advance, because it\'s cheaper and less stressful. But I leave the days fairly open, because the best moments usually come from recommendations by locals — a restaurant or a neighborhood you\'d never find in a guidebook.',
+      'Yes, I largely agree. When you travel as a tourist, you only see the surface. When you live somewhere, you have to deal with everyday things — renting an apartment, going to the bank, making friends — and that\'s when you really understand how people think. My exchange semester taught me more about Canadian culture than any number of holidays could have.',
+      'Tourism brings obvious benefits: jobs, investment and money for preserving monuments. On the other hand, when there are too many visitors, housing becomes expensive because apartments are turned into short-term rentals, and residents can be pushed out of the city center. So I think cities need to manage tourism actively, for example by limiting rentals in certain areas.'] },
+  { id: 'i06', g: 'M', topic: 'Money and spending', ctx: 'You have agreed to participate in a study about young people and money. The researcher will ask you four questions.', q: [
+    'How do you usually keep track of your spending?',
+    'What is something you think is worth spending more money on? Why?',
+    'Should schools teach students how to manage their personal finances? Why or why not?',
+    'Some people think online shopping has made people spend more than they need. What is your view?'],
+    m: [
+      'I use a budgeting app connected to my bank account. It automatically sorts my expenses into categories like food, transport and entertainment, so at the end of each month I can see exactly where my money went. It was a bit of a shock at first — I was spending far more on food delivery than I thought.',
+      'I\'d say education and experiences. For example, I happily pay for good books or a course that will teach me a real skill, because it\'s an investment that keeps paying off. Similarly, I\'d rather spend money on a trip with friends than on clothes I\'ll forget about in a month.',
+      'Absolutely. It\'s surprising that most people finish school without understanding basic things like interest rates, credit cards or taxes. As a result, many young adults make expensive mistakes, like taking on high-interest debt. Even one short course on budgeting and saving could have a huge long-term impact.',
+      'I think that\'s largely true. Online shopping removes friction: you can buy something in two clicks at midnight, and websites use techniques like limited-time offers to push you to decide quickly. Personally, I try to wait twenty-four hours before buying anything that isn\'t essential, and I often realize I don\'t actually need it.'] },
+  { id: 'i07', g: 'W', topic: 'Health and lifestyle', ctx: 'You are taking part in a study about student well-being. A researcher will ask you some questions.', q: [
+    'What do you usually do to relax after a busy day?',
+    'How important is sleep for your performance as a student? Please explain.',
+    'Some universities offer free sports classes to all students. Do you think this is a good use of university money?',
+    'Do you think people today are healthier than people fifty years ago? Why or why not?'],
+    m: [
+      'Usually I go for a run or play football with friends. After hours of sitting in front of a screen, physical activity really helps me clear my head. If I\'m too tired for that, I cook a proper meal and listen to a podcast — it\'s simple, but it helps me switch off from work.',
+      'It\'s extremely important. When I sleep less than seven hours, I notice that I read the same page three times without understanding it. I used to stay up late before exams, but I\'ve realized it\'s counterproductive: my memory is much better when I\'m well rested, so now I protect my sleep, especially during exam periods.',
+      'Yes, I think it\'s a very good investment. Regular exercise improves concentration and reduces stress, so it directly helps students succeed academically. Also, sports classes are a great way to meet people outside your program, which is especially valuable for international students who might otherwise feel isolated.',
+      'In some ways, yes: we live longer, thanks to better medicine and vaccines. But in other ways we\'re less healthy. We move much less, we eat more processed food, and stress and sleep problems seem more common. So I\'d say we\'re better at treating diseases, but our lifestyles have become less healthy.'] },
+  { id: 'i08', g: 'M', topic: 'Education', ctx: 'You have volunteered for an interview about higher education. The researcher will ask you four questions.', q: [
+    'Why did you choose your current field of study?',
+    'Describe a teacher or professor who had a strong influence on you.',
+    'Do you think university education should be free for everyone? Why or why not?',
+    'In the future, will online learning replace traditional universities? Explain your view.'],
+    m: [
+      'I chose business because I wanted a field that combines analytical thinking with real-world impact. In high school I loved mathematics, but I didn\'t want something purely theoretical. Finance in particular attracted me because every decision — investing in a project, buying a company — can be analyzed rigorously, but it also involves judgment about people and strategy.',
+      'My economics teacher in my final year of high school had a big influence on me. Instead of just lecturing, she started each class with a real news story — an interest rate decision, a company going bankrupt — and asked us to explain it with the theory. That\'s when I realized that economics isn\'t abstract; it explains what\'s happening around us every day.',
+      'I think it should be affordable for everyone, but not necessarily completely free. Free tuition sounds fair, but it\'s financed by all taxpayers, including people who never went to university and often earn less. A system with low fees and generous grants for students from modest backgrounds seems fairer to me.',
+      'I don\'t think it will replace universities entirely, but it will change them. Online courses are great for learning content, and they\'re accessible to anyone. However, universities offer things that are hard to replicate online: debates in small groups, networking, and learning to work with other people. So I expect a hybrid model to become the norm.'] },
+  { id: 'i09', g: 'W', topic: 'Environment', ctx: 'You are participating in a research survey on environmental attitudes. The interviewer will ask you some questions.', q: [
+    'What is one thing you do in your daily life to protect the environment?',
+    'Do you think individuals or governments have more responsibility for fighting climate change?',
+    'Some people are willing to pay more for products that are environmentally friendly. Are you? Why?',
+    'How do you think the way people travel will change in the next twenty years?'],
+    m: [
+      'The main thing I do is avoid using a car. I live in the city, so I walk, cycle or take public transport almost everywhere. I\'ve also reduced the amount of meat I eat — not completely, but I have vegetarian meals most days, which apparently makes a significant difference to one\'s carbon footprint.',
+      'I think governments have more responsibility, because they set the rules that shape everyone\'s choices. Individuals can make an effort, but if clean options are expensive or unavailable, most people won\'t use them. When governments invest in public transport or put a price on carbon, they change the behavior of millions of people at once.',
+      'Up to a point, yes. I\'m happy to pay a bit more for something that lasts longer or is produced responsibly, like good-quality clothes. But I\'m also skeptical, because some companies use "eco-friendly" labels simply as marketing. So I try to check certifications rather than trusting the packaging.',
+      'I think we\'ll see fewer short flights, especially in Europe, because high-speed trains are becoming faster and more comfortable. In cities, cars will probably be less central, with more bike lanes and shared electric vehicles. And thanks to video calls, many business trips will simply disappear, which has already started since the pandemic.'] },
+  { id: 'i10', g: 'M', topic: 'Leadership and teamwork', ctx: 'You are taking part in a study on teamwork among university students. The researcher will ask you some questions.', q: [
+    'Tell me about a group project you worked on recently. What was your role?',
+    'What do you think makes a good team leader?',
+    'Is it better for a team to have members with similar backgrounds or very different ones? Why?',
+    'Some people say that the best ideas come from individuals, not from groups. Do you agree?'],
+    m: [
+      'Recently I worked on a valuation project with three classmates, where we had to estimate the value of a listed company. I took on the role of coordinator: I split the tasks, set internal deadlines and made sure our models were consistent. I also built the discounted cash flow model myself, since that was my strongest area.',
+      'For me, a good leader is someone who makes everyone feel their contribution matters. That means listening before deciding, giving clear responsibilities and dealing with problems early instead of ignoring them. A leader also needs to take the blame when things go wrong and share the credit when they go well.',
+      'I think diversity is generally an advantage, as long as the team communicates well. People with different backgrounds notice different problems and suggest different solutions. In my exchange semester, my group included students from four countries, and our project was much more creative. However, it took more time at the beginning to agree on how to work together.',
+      'Partly. Original ideas often start with one person thinking deeply on their own. But groups are essential for testing and improving those ideas. Someone might have a brilliant concept, and a team will spot the weaknesses and make it workable. So I\'d say individuals create ideas, but groups turn them into something useful.'] },
+  { id: 'i11', g: 'W', topic: 'Media and news', ctx: 'You have agreed to take part in a study about how students get their news. A researcher will ask you four questions.', q: [
+    'Where do you usually get your news, and why?',
+    'How do you decide whether a piece of news you see online is reliable?',
+    'Do you think newspapers and news websites should be free? Why or why not?',
+    'Should social media companies be responsible for removing false information? Explain your view.'],
+    m: [
+      'Mostly from a couple of newspaper apps, like the Financial Times and a French daily, and from newsletters that summarize the main stories each morning. I avoid relying on social media for news, because the algorithm shows me what gets clicks rather than what\'s important.',
+      'I usually check a few things: who published it, whether other reliable sources are reporting the same story, and whether the article cites evidence, like data or named sources. If a headline is extremely emotional or sounds too shocking to be true, I\'m immediately more cautious.',
+      'Ideally, basic news should be accessible to everyone, because an informed public is essential for democracy. But quality journalism is expensive, and if everything is free, newspapers depend entirely on advertising, which pushes them toward sensational content. So I think a model with a few free articles and affordable subscriptions for students is reasonable.',
+      'I think they have some responsibility, since their platforms amplify content to millions of people. However, deciding what is "false" can be complicated, and I wouldn\'t want private companies to become censors. A better approach might be to label disputed content, reduce its visibility and link to reliable sources, rather than simply deleting it.'] },
+  { id: 'i12', g: 'M', topic: 'Innovation and business', ctx: 'You are participating in a study about entrepreneurship among young people. The interviewer will ask you some questions.', q: [
+    'Would you ever like to start your own business? Why or why not?',
+    'What qualities do you think a successful entrepreneur needs?',
+    'Some people say that failure is an important part of success. Do you agree? Please explain.',
+    'Should governments give financial support to young people who want to start a company? Why?'],
+    m: [
+      'Maybe later in my career, but not right after graduating. I\'d first like to gain experience in finance, understand how companies are valued and build a network. Starting a business without that background is very risky. But in ten years, launching a company in fintech, for example, would definitely interest me.',
+      'Resilience is probably the most important quality, because most start-ups face rejection and setbacks constantly. Entrepreneurs also need to be able to sell their vision — to investors, employees and clients. And finally, they need a certain humility: the ability to listen to customers and change the product when something doesn\'t work.',
+      'I agree, as long as people learn from it. Failure shows you what doesn\'t work much more clearly than success does. Many famous entrepreneurs failed with their first company before succeeding. However, I think this idea can be romanticized; failure is only useful if you analyze it honestly and don\'t repeat the same mistakes.',
+      'Yes, to some extent. Young people usually don\'t have savings or assets to use as collateral, so banks rarely lend to them. Small grants or low-interest loans can help talented people take the first step. But the support should be linked to training and mentoring, not just money, because many start-ups fail due to a lack of management skills rather than a lack of funding.'] },
+];

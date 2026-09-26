@@ -1,0 +1,7 @@
+# Données personnelles et secrets : ne jamais publier
+data/config.json
+data/progression.json
+data/sauvegardes/
+*.tmp
+.DS_Store
+__pycache__/
