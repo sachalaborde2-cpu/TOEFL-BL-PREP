@@ -108,11 +108,26 @@ class Handler(SimpleHTTPRequestHandler):
                 return self._json(200, {"ok": True, "ai": bool(api_key())})
             if self.path == "/api/grade":
                 return self._grade(self._body())
+            if self.path == "/api/define":
+                return self._define(self._body())
         except Exception as e:  # noqa: BLE001
             return self._json(500, {"error": str(e)})
         self._json(404, {"error": "not found"})
 
-    def _grade(self, data):
+    def _define(self, data):
+        """Traduction/définition d'un mot ou d'une expression sélectionnés dans un exercice."""
+        word = (data.get("word") or "").strip()[:100]
+        ctx = (data.get("context") or "").strip()[:500]
+        if not word:
+            return self._json(400, {"error": "Mot manquant."})
+        return self._grade({
+            "system": "You are a precise English-French lexicographer helping a French-speaking learner prepare for the TOEFL. Answer concisely.",
+            "prompt": f'Word or phrase: "{word}"\nSentence where it appears: "{ctx}"\nGive its meaning IN THIS CONTEXT: a short French translation (1 to 4 words, the sense that fits the sentence), a simple English definition (max 15 words), and a new natural example sentence.',
+            "schema": {"type": "object", "properties": {"fr": {"type": "string"}, "definition": {"type": "string"}, "example": {"type": "string"}}, "required": ["fr", "definition"]},
+        }, normalize_define)
+
+    def _grade(self, data, normalize=None):
+        normalize = normalize or normalize_grade
         key = api_key()
         if not key:
             return self._json(400, {"error": "Aucune clé API Gemini configurée (Réglages)."})
@@ -146,7 +161,7 @@ class Handler(SimpleHTTPRequestHandler):
                 last_err = "Réponse illisible : " + text[:300]
                 continue
             STATE["model"] = model
-            return self._json(200, {"result": normalize_grade(result), "model": model})
+            return self._json(200, {"result": normalize(result), "model": model})
         return self._json(502, {"error": last_err or "Aucun modèle Gemini disponible pour cette clé."})
 
 
@@ -211,6 +226,10 @@ def parse_json_loose(text):
         return json.loads(t[i:j + 1])
     except ValueError:
         return None
+
+
+def normalize_define(r):
+    return {"fr": str(r.get("fr") or "").strip(), "definition": str(r.get("definition") or "").strip(), "example": str(r.get("example") or "").strip()}
 
 
 def normalize_grade(r):

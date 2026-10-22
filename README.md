@@ -17,7 +17,7 @@ Tu peux aussi la lancer à la main : `python3 server.py`, puis ouvre http://loca
 | Mon plan | 5 phases jusqu'au jour J, calendrier des tests blancs, priorités recalculées chaque jour |
 | Entraînement | Les 12 types de tâches 2026, avec une fiche méthode par tâche |
 | Tests blancs | Diagnostic, 3 tests blancs fixes + tests aléatoires, Reading/Listening adaptatifs |
-| Vocabulaire | 205 mots académiques, finance et idiomes, en répétition espacée + mode orthographe |
+| Vocabulaire | 205 mots + tes propres mots ajoutés depuis les exercices académiques, finance et idiomes, en répétition espacée + mode orthographe |
 | Carnet d'erreurs | Chaque erreur revient jusqu'à 2 réussites consécutives |
 | Suivi | Courbes de progression, activité, historique des productions corrigées |
 | Guide | Analyse du test, correspondances score/CECRL, stratégies, checklist du jour J |
@@ -41,6 +41,16 @@ Le suivi est enregistré dans la progression (`bags`, `cycles`, `lv`). Une ancie
 - **Fond animé** : un dégradé qui respire, quatre nappes lumineuses violettes, roses et bleues qui dérivent en continu, des particules qui scintillent et montent doucement (canvas léger, ~35 images/s, en pause quand l'onglet est caché), et des formes 3D flottantes. La souris déplace légèrement les couches (parallaxe).
 - **Mouvement 3D** (`app/js/motion.js`) : cartes qui s'inclinent au survol, boutons en relief qui s'enfoncent, entrées animées. Tout est coupé si ton système demande de réduire les animations : le fond reste alors un dégradé fixe.
 - **Exercices en plein écran** : pendant une séance, le menu se réduit à des icônes et la zone d'exercice occupe toute la page. Le texte s'agrandit avec la fenêtre (paragraphe à trous, phrases à reconstruire, éditeur).
+
+## Ajouter un mot au vocabulaire depuis un exercice
+
+Dans n'importe quel texte d'exercice (documents, passages, conversations après l'écoute, consignes…), **sélectionne un mot ou une expression** que tu ne comprends pas : double-clic sur un mot, ou glisse sur une expression (jusqu'à 6 mots). Une pastille **« + Vocabulaire »** apparaît ; clique dessus ou appuie sur la touche **V**.
+
+- Le mot est enregistré avec la **phrase d'où il vient**, dans le thème **« Mes mots »** de la page Vocabulaire.
+- Il entre aussitôt dans la **révision espacée**, avant les mots du programme et sans limite quotidienne.
+- Si une clé Gemini est configurée (Réglages), la **traduction et la définition se remplissent toutes seules** (bouton « ✨ IA » dans la carte si tu veux la relancer). Sinon, tape toi-même ta traduction dans la liste ou sur la carte de révision.
+- Page Vocabulaire : ajout manuel d'un mot, modification de la traduction, suppression.
+- Tes mots font partie de ta progression : ils sont exportés et importés avec le fichier JSON.
 
 ## Correction automatique par l'IA (optionnel, gratuit)
 

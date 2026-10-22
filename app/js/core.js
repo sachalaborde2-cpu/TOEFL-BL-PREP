@@ -94,6 +94,7 @@ function defaultState() {
     seen: {},       // "type:id" -> ts
     bags: null,     // type -> ids faits dans le cycle en cours (null = à reconstruire depuis `seen`)
     cycles: {},     // type -> nombre de cycles complets terminés
+    myVocab: [],    // mots/expressions ajoutés depuis les exercices : {w, fr, d, ctx, ts}
     lv: {},         // type -> niveau courant des séquences : 2 = B2 (pool B2/C1/C2), 3 = C1 (pool C1/C2)
     mocks: [],      // rapports de tests blancs
     errors: [],     // carnet d'erreurs

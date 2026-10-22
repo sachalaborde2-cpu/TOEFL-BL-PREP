@@ -104,7 +104,32 @@ const Planner = {
 /* ---------- Vocabulaire (répétition espacée, boîtes de Leitner) ---------- */
 const INTERVALS = [0, 1, 2, 4, 8, 16, 35];
 const Vocab = {
-  list() { return CONTENT.vocab || []; },
+  /* mots du programme + mots que tu as ajoutés toi-même depuis les exercices (thème « Mes mots ») */
+  mine() { return (Store.s.myVocab || []).map((m) => ({ w: m.w, fr: m.fr || '', d: m.d || '', ex: m.ctx || '', th: 'Mes mots', mine: true })); },
+  list() { return (CONTENT.vocab || []).concat(this.mine()); },
+  /* ajoute un mot ; renvoie 'new', 'mine' (déjà à toi) ou 'std' (déjà dans le programme) */
+  add(raw, ctx) {
+    let w = String(raw || '').replace(/\s+/g, ' ').replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, '').trim();
+    if (!w) return null;
+    if (!/[A-Z]{2,}/.test(w) && !/.[A-Z]/.test(w)) w = w.toLowerCase();
+    const s = Store.s; s.myVocab = s.myVocab || [];
+    if (s.myVocab.some((m) => m.w.toLowerCase() === w.toLowerCase())) return { w, status: 'mine' };
+    if ((CONTENT.vocab || []).some((v) => v.w.toLowerCase() === w.toLowerCase())) return { w, status: 'std' };
+    const entry = { w, fr: '', d: '', ctx: String(ctx || '').trim().slice(0, 400), ts: Date.now() };
+    s.myVocab.push(entry); Store.save();
+    return { w, status: 'new', entry };
+  },
+  remove(w) { const s = Store.s; s.myVocab = (s.myVocab || []).filter((m) => m.w !== w); delete s.vocab[w]; Store.save(); },
+  setFr(w, fr) { const m = (Store.s.myVocab || []).find((x) => x.w === w); if (m) { m.fr = String(fr || '').trim(); Store.save(); } },
+  /* traduction par l'IA (Gemini) si une clé est configurée ; sinon renvoie null */
+  async define(w) {
+    const m = (Store.s.myVocab || []).find((x) => x.w === w); if (!m || !Store.ai) return null;
+    try {
+      const r = await fetch('/api/define', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ word: m.w, context: m.ctx }) });
+      const j = await r.json(); if (!r.ok || !j.result) return null;
+      if (j.result.fr) m.fr = j.result.fr; if (j.result.definition) m.d = j.result.definition; Store.save(); return j.result;
+    } catch (e) { return null; }
+  },
   card(w) { return Store.s.vocab[w]; },
   dueCount() { const now = Date.now(); return Object.values(Store.s.vocab).filter((c) => c.due <= now && c.box < 6).length; },
   learnedCount() { return Object.values(Store.s.vocab).filter((c) => c.box >= 3).length; },
@@ -112,7 +137,9 @@ const Vocab = {
     const now = Date.now();
     const due = this.list().filter((v) => { const c = this.card(v.w); return c && c.due <= now && c.box < 6; });
     const introducedToday = Object.values(Store.s.vocab).filter((c) => c.intro === todayStr()).length;
-    const fresh = this.list().filter((v) => !this.card(v.w)).slice(0, Math.max(0, newPerDay - introducedToday));
+    // tes propres mots passent en premier et ne sont jamais limités par le quota du jour
+    const unseen = this.list().filter((v) => !this.card(v.w));
+    const fresh = unseen.filter((v) => v.mine).concat(unseen.filter((v) => !v.mine).slice(0, Math.max(0, newPerDay - introducedToday)));
     return shuffle(due).concat(fresh);
   },
   grade(w, g) { // g: 0 raté, 1 hésitant, 2 su
@@ -356,13 +383,27 @@ function pageVocab(view, [sub]) {
   if (sub === 'spell') return vocabSpell(view);
   const list = Vocab.list(); const themes = [...new Set(list.map((v) => v.th))];
   const boxCounts = [0, 0, 0, 0, 0, 0, 0]; Object.values(Store.s.vocab).forEach((c) => boxCounts[c.box]++);
-  view.innerHTML = `<h1>Vocabulaire académique</h1><p class="t2">${list.length} mots et expressions de niveau B2-C1 choisis pour le TOEFL (Academic Word List + économie/finance + connecteurs), avec répétition espacée : chaque mot revient juste avant que tu l'oublies.</p>
+  view.innerHTML = `<h1>Vocabulaire académique</h1><p class="t2">${list.length} mots et expressions (dont <b>${Vocab.mine().length} à toi</b>) avec répétition espacée : chaque mot revient juste avant que tu l'oublies. <b>Astuce :</b> dans un exercice, sélectionne un mot ou une expression que tu ne comprends pas puis clique sur « + Vocabulaire » (ou touche V) : il arrive ici, dans « Mes mots ».</p>
     <div class="grid g4"><div class="card kpi"><span class="label">À réviser aujourd'hui</span><span class="value">${Vocab.dueCount()}</span></div><div class="card kpi"><span class="label">Vus</span><span class="value">${Object.keys(Store.s.vocab).length}</span><span class="sub">sur ${list.length}</span></div><div class="card kpi"><span class="label">Maîtrisés</span><span class="value">${Vocab.learnedCount()}</span><span class="sub">boîte ≥ 3</span></div><div class="card kpi"><span class="label">Aujourd'hui</span><span class="value">${(Store.s.vocabLog || {})[todayStr()] || 0}</span><span class="sub">cartes revues</span></div></div>
     <div class="row mt"><a class="btn primary lg" href="#/vocab/study">Réviser (cartes)</a><a class="btn lg" href="#/vocab/spell">Mode « Complete the Words » (orthographe)</a></div>
     <div class="card mt"><h3>Répartition par boîte</h3><div class="row">${boxCounts.map((c, i) => `<span class="pill">Boîte ${i} : ${c}</span>`).join('')}</div></div>
     <h2 class="mt2">Liste</h2><div class="row mb">${themes.map((t) => `<button class="btn sm th" data-t="${esc(t)}">${esc(t)}</button>`).join('')}<button class="btn sm th primary" data-t="">Tous</button></div>
+    <div class="card mb"><h3>Ajouter un mot ou une expression</h3><div class="row"><input type="text" id="vm-w" placeholder="Mot ou expression en anglais" style="flex:1;min-width:200px"><input type="text" id="vm-fr" placeholder="Traduction (facultatif)" style="flex:1;min-width:200px"><button class="btn primary" id="vm-add">Ajouter</button></div></div>
     <div class="card table-wrap"><table class="tbl vl"></table></div>`;
-  const draw = (th) => { $('.vl', view).innerHTML = '<tr><th>Mot</th><th>Français</th><th>Exemple</th><th>Boîte</th></tr>' + list.filter((v) => !th || v.th === th).map((v) => `<tr><td><b>${esc(v.w)}</b><br><span class="small muted">${esc(v.d)}</span></td><td>${esc(v.fr)}</td><td class="small"><i>${esc(v.ex)}</i></td><td>${Store.s.vocab[v.w] ? Store.s.vocab[v.w].box : '—'}</td></tr>`).join(''); };
+  let curTh = '';
+  const draw = (th) => {
+    curTh = th; const L = Vocab.list();
+    $('.vl', view).innerHTML = '<tr><th>Mot</th><th>Français</th><th>Exemple</th><th>Boîte</th></tr>' + L.filter((v) => !th || v.th === th).map((v) => `<tr><td><b>${esc(v.w)}</b>${v.mine ? ' <span class="pill">à toi</span>' : ''}<br><span class="small muted">${esc(v.d)}</span></td><td>${v.mine ? `<input type="text" class="my-fr" data-w="${esc(v.w)}" value="${esc(v.fr)}" placeholder="traduction">` : esc(v.fr)}</td><td class="small"><i>${esc(v.ex)}</i></td><td>${Store.s.vocab[v.w] ? Store.s.vocab[v.w].box : '—'}${v.mine ? ` <button class="btn sm ghost my-del" data-w="${esc(v.w)}" title="Supprimer">✕</button>` : ''}</td></tr>`).join('');
+    $$('.my-fr', view).forEach((i) => i.onchange = () => Vocab.setFr(i.dataset.w, i.value));
+    $$('.my-del', view).forEach((b) => b.onclick = () => { if (confirm('Supprimer « ' + b.dataset.w + ' » de tes mots ?')) { Vocab.remove(b.dataset.w); draw(curTh); } });
+  };
+  $('#vm-add', view).onclick = () => {
+    const r = Vocab.add($('#vm-w', view).value, '');
+    if (!r) return toast('Écris un mot ou une expression');
+    if (r.status === 'new') { Vocab.setFr(r.w, $('#vm-fr', view).value); toast('« ' + r.w + ' » ajouté à tes mots'); if (!$('#vm-fr', view).value.trim()) Vocab.define(r.w).then(() => draw(curTh)); }
+    else toast('« ' + r.w + ' » est déjà dans ta liste');
+    $('#vm-w', view).value = ''; $('#vm-fr', view).value = ''; draw(curTh);
+  };
   $$('.th', view).forEach((b) => b.onclick = () => { $$('.th', view).forEach((x) => x.classList.remove('primary')); b.classList.add('primary'); draw(b.dataset.t); });
   draw('');
 }
@@ -374,12 +415,17 @@ function vocabStudy(view) {
     const v = q[i]; const c = Store.s.vocab[v.w];
     view.innerHTML = `<div class="session-top"><a class="btn sm ghost" href="#/vocab">✕</a><span class="title">Vocabulaire</span><span class="muted small">${i + 1}/${q.length}${c ? '' : ' · nouveau'}</span></div>
       <div class="card flash mt2"><div class="muted small">${esc(v.th)}</div><div class="word mt">${esc(v.w)}</div><button class="btn sm ghost say">🔊</button>
-      <div class="back" style="display:none"><hr><p class="def"><b>${esc(v.fr)}</b></p><p class="t2">${esc(v.d)}</p><p><i>${esc(v.ex)}</i></p>${v.col ? `<p class="small muted">Collocations : ${esc(v.col)}</p>` : ''}</div>
+      <div class="back" style="display:none"><hr><p class="def"><b>${esc(v.fr || (v.mine ? 'Traduction à compléter' : ''))}</b></p><p class="t2">${esc(v.d)}</p><p><i>${esc(v.ex)}</i></p>${v.col ? `<p class="small muted">Collocations : ${esc(v.col)}</p>` : ''}${v.mine ? `<div class="row mt" style="justify-content:center"><input type="text" class="my-fr2" value="${esc(v.fr)}" placeholder="Ta traduction / note" style="max-width:260px"><button class="btn sm sv">Enregistrer</button>${Store.ai ? '<button class="btn sm ai">✨ IA</button>' : ''}</div>` : ''}</div>
       <div class="row mt2 act" style="justify-content:center"><button class="btn primary lg rev">Afficher (espace)</button></div></div>`;
     Voice.play([{ t: v.w, g: 'W' }]);
     $('.say', view).onclick = () => Voice.play([{ t: v.w + '. ' + v.ex, g: 'W' }]);
     const reveal = () => {
       $('.back', view).style.display = '';
+      if (v.mine) {
+        const inp = $('.my-fr2', view), pdef = $('.def b', view);
+        $('.sv', view).onclick = () => { Vocab.setFr(v.w, inp.value); v.fr = inp.value; pdef.textContent = inp.value || 'Traduction à compléter'; toast('Enregistré'); };
+        const ai = $('.ai', view); if (ai) ai.onclick = async () => { ai.disabled = true; const r = await Vocab.define(v.w); ai.disabled = false; if (r && r.fr) { inp.value = r.fr; v.fr = r.fr; pdef.textContent = r.fr; if (r.definition) $('.back .t2', view).textContent = r.definition; } else toast('IA indisponible'); };
+      }
       $('.act', view).innerHTML = '<button class="btn danger g0">✗ Je ne savais pas (1)</button><button class="btn g1">~ Hésitant (2)</button><button class="btn good g2">✓ Je savais (3)</button>';
       $('.g0', view).onclick = () => { Vocab.grade(v.w, 0); q.push(v); i++; show(); };
       $('.g1', view).onclick = () => { Vocab.grade(v.w, 1); i++; show(); };
