@@ -183,22 +183,31 @@ Tasks.ap = {
 /* =========================================================
    LISTENING
    ========================================================= */
-function audioBox(el, { avatar = '🎧', label = '', ctx, segments, onEnded, allowReplay }) {
+function audioBox(el, { avatar = '🎧', label = '', ctx, segments, onEnded, allowReplay, names = {} }) {
   const box = h(`<div class="audio-box"><div class="speaker-avatar">${avatar}</div><div style="flex:1"><div class="small t2">${label}</div><div class="row" style="margin-top:6px"><div class="wave"><i></i><i></i><i></i><i></i><i></i></div><span class="st small muted">Prêt</span></div></div><div class="ctl"></div></div>`);
   el.appendChild(box);
   const wave = $('.wave', box), st = $('.st', box), ctl = $('.ctl', box);
-  let plays = 0; const voices = Voice.cast([...new Set(segments.map((s) => s.g || 'W'))]);
+  let plays = 0; const voices = {}; // rempli à la première lecture, puis réutilisé : mêmes voix à la réécoute
+  const playBtn = (txt = '▶ Écouter') => { ctl.innerHTML = `<button class="btn primary">${txt}</button>`; $('button', ctl).onclick = play; };
   const play = async () => {
     plays++; ctl.innerHTML = ''; wave.classList.add('on'); st.textContent = 'Écoute…';
     ctx.onAudio && ctx.onAudio(true);
-    await Voice.play(segments, { voices });
+    const r = await Voice.play(segments, { voices });
     wave.classList.remove('on'); ctx.onAudio && ctx.onAudio(false);
-    st.textContent = allowReplay ? `Écouté ${plays}×` : 'Terminé (une seule écoute, comme au test)';
-    if (allowReplay) ctl.innerHTML = '<button class="btn sm">↻ Réécouter</button>', $('button', ctl).onclick = play;
+    if (!box.isConnected || r.interrupted) return;           // on a quitté l'exercice ou relancé l'audio
+    if (r.blocked) {                                          // le navigateur refuse la lecture automatique : il faut un clic
+      plays--; st.textContent = 'Le navigateur bloque la lecture automatique : clique sur ▶ pour lancer l\'audio.'; return playBtn();
+    }
+    if (r.total && !r.played) {                               // aucune voix n'a répondu (connexion ? voix en ligne indisponibles ?)
+      st.textContent = 'Audio indisponible (connexion internet ? voix en panne ?). Voici la transcription pour ne pas te bloquer.';
+      if (!box.nextElementSibling || !box.nextElementSibling.matches('details.fold')) box.insertAdjacentHTML('afterend', transcriptHtml(segments, names).replace('<details class="fold mt">', '<details class="fold mt" open>'));
+      playBtn('↻ Réessayer'); if (plays === 1) onEnded && onEnded(); return;
+    }
+    st.textContent = (r.failed ? 'Quelques passages n\'ont pas pu être lus. ' : '') + (allowReplay ? `Écouté ${plays}×` : 'Terminé (une seule écoute, comme au test)');
+    if (allowReplay) playBtn('↻ Réécouter');
     if (plays === 1) onEnded && onEnded();
   };
-  ctl.innerHTML = '<button class="btn primary">▶ Écouter</button>';
-  $('button', ctl).onclick = play;
+  playBtn();
   setTimeout(() => { if (box.isConnected && !plays) play(); }, 600); // lecture automatique, comme au test
   return { play, voices };
 }
@@ -230,7 +239,7 @@ function listeningSet(type, labelFn) {
       el.innerHTML = `${taskHead(type)}<div class="directions">${esc(item.ctx)}</div>`;
       const qwrap = h('<div class="qs" style="display:none"></div>');
       let bar = null;
-      const ab = audioBox(el, { avatar: labelFn(item), label: esc(item.ctx), ctx, segments: segs, allowReplay: ctx.mode !== 'exam' && Store.s.settings.replay, onEnded: () => { qwrap.style.display = ''; if (bar) bar.btn.disabled = false; } });
+      const ab = audioBox(el, { avatar: labelFn(item), label: esc(item.ctx), ctx, segments: segs, names: item.names || {}, allowReplay: ctx.mode !== 'exam' && Store.s.settings.replay, onEnded: () => { qwrap.style.display = ''; if (bar) bar.btn.disabled = false; } });
       if (ctx.mode !== 'exam') el.appendChild(h('<p class="small muted">Astuce : prends des notes sur papier pendant l\'écoute (autorisé au vrai test). Les questions n\'apparaissent qu\'après l\'audio.</p>'));
       el.appendChild(qwrap);
       const mcq = renderMCQ(qwrap, item.qs, ctx);

@@ -52,6 +52,13 @@ Dans n'importe quel texte d'exercice (documents, passages, conversations après 
 - Page Vocabulaire : ajout manuel d'un mot, modification de la traduction, suppression.
 - Tes mots font partie de ta progression : ils sont exportés et importés avec le fichier JSON.
 
+## Audio du Listening
+
+- Les voix sont celles de ton navigateur. Sous Edge/Windows, ce sont des voix « Natural » **en ligne** : il faut une connexion internet. Chaque changement de voix garde un court délai du moteur (0,2 à 0,4 s) ; l'appli enchaîne les répliques sans temps mort supplémentaire.
+- Si le navigateur bloque la lecture automatique (par exemple après un rechargement de la page), un bouton **▶ Écouter** apparaît : clique dessus. L'audio n'est pas compté comme écouté tant qu'il n'a pas été lu.
+- Si aucune voix ne répond (connexion coupée), la transcription s'ouvre et les questions se débloquent, avec un bouton **↻ Réessayer**.
+- Vitesse : Réglages > Vitesse des voix (0,8 à 1,25). Les voix en ligne parlent déjà à un débit de test.
+
 ## Correction automatique par l'IA (optionnel, gratuit)
 
 Colle une clé **Google Gemini** (gratuite sur https://aistudio.google.com/app/apikey) dans **Réglages**. Elle est enregistrée dans `data/config.json`, exclu de Git. Les e-mails, discussions et entretiens sont alors notés sur la grille officielle 0-5, avec des corrections détaillées.
@@ -68,3 +75,7 @@ Navigateur conseillé : **Google Chrome** (voix de synthèse et reconnaissance v
 
 - Fait : niveau adaptatif (minimum B2), relecture complète des banques d'origine, doublement de **tous** les types d'exercices, direction artistique violette avec fond animé, ajout de mots au vocabulaire depuis les exercices.
 - Pistes : une relecture croisée des nouvelles séquences par un second relecteur (surtout les distracteurs des répliques B2, parfois simples), et davantage de séquences C2 pour les types encore peu fournis (phrases à reconstruire, textes académiques).
+
+## Pour reprendre le travail (ou ouvrir une nouvelle conversation)
+
+Tout l'état du projet est dans le dépôt : `CLAUDE.md` (contexte, architecture, état actuel, à faire), `docs/JOURNAL.md` (historique, décisions, mesures) et `tools/` (scripts de contrôle). Une nouvelle conversation Claude Code ouverte dans ce dossier lit `CLAUDE.md` automatiquement ; ces fichiers sont tenus à jour à chaque étape et voyagent avec `git pull`.

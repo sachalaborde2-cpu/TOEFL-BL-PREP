@@ -308,24 +308,32 @@ const Estimator = {
 };
 
 /* ---------- Audio : synthèse vocale ---------- */
-const FEMALE = /samantha|karen|moira|tessa|victoria|allison|ava|susan|serena|kate|fiona|veena|female|zoe|zoë|nicky|catherine|martha|shelley|sandy|flo|kathy|agnes|joanna|salli|kimberly|ivy|emma|amy|libby|sonia|natasha|jenny|aria|michelle|google us english|siri.*voice 2|stephanie/i;
-const MALE = /daniel|alex\b|fred|rishi|aaron|arthur|gordon|tom\b|oliver|evan|nathan|male|lee\b|reed|rocko|eddy|grandpa|ralph|albert|bruce|junior|matthew|justin|joey|brian|ryan|guy|william|thomas|siri.*voice 1|james/i;
+/* Les listes de prénoms servent à deviner le genre d'une voix (Windows/Edge : « Microsoft Aria Online (Natural) », macOS : « Samantha »…) */
+const FEMALE = /samantha|karen|moira|tessa|victoria|allison|\bava\b|susan|serena|kate|fiona|veena|\bfemale\b|zoe|zoë|nicky|catherine|martha|shelley|sandy|flo|kathy|agnes|joanna|salli|kimberly|ivy|emma|amy|libby|sonia|natasha|jenny|aria|michelle|google us english|siri.*voice 2|stephanie|clara|maisie|emily|neerja|asilia|ezinne|molly|rosa|luna|imani|leah|\bana\b|\byan\b/i;
+const MALE = /daniel|alex\b|fred|rishi|aaron|arthur|gordon|tom\b|oliver|evan|nathan|\bmale\b|lee\b|reed|rocko|eddy|grandpa|ralph|albert|bruce|junior|matthew|justin|joey|brian|ryan|guy|william|thomas|siri.*voice 1|james|andrew|christopher|\beric\b|roger|steffan|liam|connor|mitchell|wayne|luke|prabhat|\bsam\b|elimu|chilemba|abeo/i;
 const Voice = {
-  voices: [], _keep: [],
+  voices: [], _keep: [], _bad: new Set(), speaking: false, _token: null, _lastCancel: 0, _seq: 0,
   init() {
     if (!('speechSynthesis' in window)) return;
     const load = () => { this.voices = speechSynthesis.getVoices().filter((v) => /^en[-_]/i.test(v.lang)); };
     load(); speechSynthesis.onvoiceschanged = load;
   },
+  /* attend que la liste des voix soit chargée (Chrome/Edge la remplissent après coup) : évite de lire avec une voix par défaut */
+  ready() {
+    if (this.voices.length) return Promise.resolve();
+    this.init();
+    return new Promise((res) => { const t0 = Date.now(); const iv = setInterval(() => { if (this.voices.length || Date.now() - t0 > 2500) { clearInterval(iv); res(); } }, 50); });
+  },
   gender(v) { if (MALE.test(v.name)) return 'M'; if (FEMALE.test(v.name)) return 'W'; return '?'; },
   quality(v) { return (/enhanced|premium|neural|natural/i.test(v.name) ? 3 : 0) + (/google/i.test(v.name) ? 2 : 0) + (v.localService ? 0.5 : 0) - (/fred|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|ralph|grandma|grandpa|eddy|flo|reed|rocko|sandy|shelley/i.test(v.name) ? 10 : 0); },
   accentList() { const a = Store.s.settings.accent; if (a === 'us') return ['en-US']; if (a === 'gb') return ['en-GB']; return ['en-US', 'en-GB', 'en-AU', 'en-US']; },
-  /* Choisit une voix pour un genre + un accent ; retombe sur n'importe quelle voix anglaise */
+  /* Choisit une voix pour un genre + un accent ; retombe sur n'importe quelle voix anglaise. Les voix qui ont échoué sont écartées. */
   pick(g = 'W', accent = null, avoid = null) {
     if (!this.voices.length) this.init();
     const acc = accent || shuffle(this.accentList())[0];
     const norm = (l) => l.replace('_', '-');
-    const cands = this.voices.filter((v) => v !== avoid);
+    let cands = this.voices.filter((v) => v !== avoid && !this._bad.has(v.name));
+    if (!cands.length) cands = this.voices.filter((v) => v !== avoid);
     const score = (v) => this.quality(v) + (this.gender(v) === g ? 5 : this.gender(v) === '?' ? 1 : -3) + (norm(v.lang).startsWith(acc) ? 3 : 0) + Math.random();
     return cands.sort((a, b) => score(b) - score(a))[0] || null;
   },
@@ -334,31 +342,99 @@ const Voice = {
     for (const g of genders) { if (!map[g]) { map[g] = this.pick(g, null, prev); prev = map[g]; } }
     return map;
   },
-  cancel() { if ('speechSynthesis' in window) speechSynthesis.cancel(); this.speaking = false; },
-  /* segments : [{t, g}] ; lit tout, phrase par phrase (évite la coupure de Chrome sur les longs textes) */
+  /* Annule la lecture en cours. Après une annulation, les moteurs en ligne (Edge) refusent de parler pendant quelques centaines de ms
+     (erreur « synthesis-failed », mesurée : 43 % d'échecs à 60 ms, 0 % à 400 ms) : on note l'heure et on attend avant de reparler. */
+  cancel() {
+    if ('speechSynthesis' in window) { if (speechSynthesis.speaking || speechSynthesis.pending) this._lastCancel = Date.now(); speechSynthesis.cancel(); }
+    this.speaking = false; this._token = null;
+  },
+  async _settle() { const w = 450 - (Date.now() - this._lastCancel); if (w > 0) await sleep(w); },
+  /* Découpe un texte en phrases sans couper après « Dr. », « Ms. », « a.m. », « e.g. » ni dans « 3.5 » */
+  sentences(text) {
+    const t = String(text).replace(/\s+/g, ' ').trim(); if (!t) return [];
+    const ABBR = /^(?:Dr|Mr|Mrs|Ms|Prof|St|Jr|Sr|vs|etc|Inc|Ltd|Co|No|Fig|Vol|approx|Mt)\.$/i, DOTTED = /^(?:[A-Za-z]\.){2,}[,;:)]?$/;
+    const out = []; let cur = '';
+    for (const tok of t.split(/(\s+)/)) {
+      cur += tok; if (!tok.trim()) continue;
+      if (/[.!?]["')\]]*$/.test(tok) && !ABBR.test(tok) && !DOTTED.test(tok) && !/\.\.\.$/.test(tok)) { out.push(cur.trim()); cur = ''; }
+    }
+    if (cur.trim()) out.push(cur.trim());
+    return out;
+  },
+  /* Prépare le texte pour la voix : tirets, symboles et marques qu'elle lirait mal */
+  speakable(t) {
+    return String(t).replace(/\s*[—–]\s*/g, ', ').replace(/…/g, '...').replace(/&/g, ' and ').replace(/and\/or/gi, 'and or').replace(/([A-Za-z])\/([A-Za-z])/g, '$1 or $2').replace(/[*_#~^|<>{}\[\]]/g, ' ').replace(/\s+/g, ' ').trim();
+  },
+  /* Morceaux à lire d'un seul souffle : une réplique courte = 1 morceau (moins de redémarrages du moteur = moins de blancs),
+     un long texte est coupé à la fin d'une phrase vers 240 caractères (les très longs textes sont coupés par les moteurs en ligne). */
+  chunks(text, max = 240) {
+    const out = []; let cur = '';
+    for (const s of this.sentences(this.speakable(text))) {
+      if (cur && (cur + ' ' + s).length > max) { out.push(cur); cur = s; } else cur = cur ? cur + ' ' + s : s;
+    }
+    if (cur) out.push(cur);
+    return out.flatMap((c) => {
+      if (c.length <= 420) return [c];
+      const parts = c.split(/(?<=[,;:])\s+/), r = []; let b = '';
+      for (const p of parts) { if (b && (b + ' ' + p).length > max) { r.push(b); b = p; } else b = b ? b + ' ' + p : p; }
+      if (b) r.push(b); return r;
+    });
+  },
+  /* segments : [{t, g}] ; lit tout. Les morceaux sont enchaînés sans temps mort : le suivant est mis en file dès que le précédent démarre.
+     Renvoie { ok, blocked, interrupted, played, failed, total } :
+       blocked     = le navigateur refuse de parler sans clic préalable (il faut un bouton ▶) ;
+       failed      = nombre de morceaux que la voix n'a pas pu lire (réseau coupé, voix en panne). */
   async play(segments, { rate = null, voices = null, onStart, onEnd } = {}) {
-    if (!('speechSynthesis' in window)) { toast('Synthèse vocale indisponible dans ce navigateur'); return; }
-    this.cancel(); await sleep(60);
-    const cast = voices || this.cast([...new Set(segments.map((s) => s.g || 'W'))]);
-    const r = (rate || Store.s.settings.rate || 1) * 0.98;
-    this.speaking = true; this._token = uid(); const tok = this._token;
-    onStart && onStart();
-    for (const seg of segments) {
-      const parts = String(seg.t).match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g) || [seg.t];
-      for (const p of parts) {
-        if (this._token !== tok || !this.speaking) return;
-        await new Promise((res) => {
-          const u = new SpeechSynthesisUtterance(p.trim());
-          const v = cast[seg.g || 'W']; if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'en-US';
-          u.rate = r; u.onend = u.onerror = () => res();
-          this._keep.push(u); if (this._keep.length > 50) this._keep.shift();
-          speechSynthesis.speak(u);
-          setTimeout(res, 20000 + p.length * 120); // garde-fou
-        });
+    const res = { ok: true, blocked: false, interrupted: false, played: 0, failed: 0, total: 0 };
+    if (!('speechSynthesis' in window)) { toast('Synthèse vocale indisponible dans ce navigateur'); res.ok = false; res.failed = 1; res.total = 1; return res; }
+    await this.ready();
+    const cast = voices || {}; let prevV = null; // voix manquantes (liste pas encore chargée au rendu) : choisies maintenant, et conservées pour la réécoute
+    for (const g of new Set(segments.map((s) => s.g || 'W'))) { if (!cast[g]) cast[g] = this.pick(g, null, prevV); prevV = cast[g]; }
+    const queue = []; for (const seg of segments) for (const t of this.chunks(seg.t)) queue.push({ t, g: seg.g || 'W' });
+    res.total = queue.length; if (!queue.length) return res;
+    const myId = ++this._seq; this.cancel(); await this._settle();
+    if (myId !== this._seq) { res.interrupted = true; return res; } // une autre lecture a été demandée entre-temps
+    const r = rate || Store.s.settings.rate || 1;
+    const tok = this._token = uid(); this.speaking = true; onStart && onStart();
+    const alive = () => this._token === tok && this.speaking;
+    const items = []; // un objet par morceau : { began, p (promesse de fin), fail() }
+    const make = (i) => {
+      const c = queue[i], o = { began: false };
+      o.p = new Promise((resolve) => {
+        const v = cast[c.g]; const u = new SpeechSynthesisUtterance(c.t);
+        if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'en-US';
+        u.rate = r; let done = false, wd = null;
+        const finish = (st) => { if (done) return; done = true; clearTimeout(wd); resolve(st); };
+        o.fail = () => { try { this._lastCancel = Date.now(); speechSynthesis.cancel(); } catch (e) { /* rien */ } finish('fail'); };
+        u.onstart = () => { o.began = true; if (i + 1 < queue.length && alive() && !items[i + 1]) items[i + 1] = make(i + 1); };
+        u.onend = () => finish('ok');
+        u.onerror = (e) => finish(e.error === 'not-allowed' ? 'blocked' : (e.error === 'interrupted' || e.error === 'canceled') ? 'stop' : o.began ? 'cut' : 'fail');
+        wd = setTimeout(() => finish(o.began ? 'cut' : 'fail'), 30000 + c.t.length * 140); // garde-fou global
+        this._keep.push(u); if (this._keep.length > 60) this._keep.shift(); // évite que le navigateur ne ramasse l'objet en cours de lecture
+        try { speechSynthesis.resume(); } catch (e) { /* rien */ }
+        speechSynthesis.speak(u);
+      });
+      return o;
+    };
+    for (let i = 0; i < queue.length; i++) {
+      if (!alive()) { res.interrupted = true; return res; }
+      let o = items[i] || (items[i] = make(i));
+      let dog = setTimeout(() => { if (!o.began) o.fail(); }, 8000); // aucun son 8 s après son tour : la voix ne répond pas
+      let st = await o.p; clearTimeout(dog);
+      if (st === 'fail' && alive()) { // une seule nouvelle tentative, avec une autre voix (la voix défaillante est écartée)
+        const bad = cast[queue[i].g]; if (bad) this._bad.add(bad.name);
+        const alt = this.pick(queue[i].g, null, bad); if (alt) cast[queue[i].g] = alt;
+        try { this._lastCancel = Date.now(); speechSynthesis.cancel(); } catch (e) { /* rien */ }
+        await this._settle(); if (!alive()) { res.interrupted = true; return res; }
+        o = items[i] = make(i);
+        dog = setTimeout(() => { if (!o.began) o.fail(); }, 8000); st = await o.p; clearTimeout(dog);
       }
-      if (segments.length > 1) await sleep(280);
+      if (st === 'blocked') { res.blocked = true; this.speaking = false; return res; }
+      if (st === 'stop' || !alive()) { res.interrupted = true; return res; }
+      if (st === 'ok' || st === 'cut') res.played++; else res.failed++;
     }
     if (this._token === tok) { this.speaking = false; onEnd && onEnd(); }
+    return res;
   },
 };
 
