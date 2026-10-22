@@ -1,77 +1,91 @@
 /* =========================================================
-   TOEFL Prep — thème « Aurora » : couleurs douces, profondeur 3D, exercices plein écran.
+   TOEFL Prep — direction artistique « Violet » : tons violets doux, fond violet profond (jamais noir),
+   fond animé (nappes lumineuses + particules), profondeur 3D, exercices plein écran.
    Chargé APRÈS style.css : il surcharge les variables et ajoute les effets.
-   Tout le mouvement est désactivé si le système demande « réduire les animations ».
+   Tout le mouvement est coupé si le système demande « réduire les animations ».
    ========================================================= */
 
-/* ---------- Palette douce (faible contraste agressif, pas de blanc pur ni de noir pur) ---------- */
+/* ---------- Palette : lavande clair ---------- */
 :root {
-  --bg: #e9eef1;
-  --surface: #f6f8f9;
-  --surface-2: #e3e9ed;
-  --border: #d3dce2;
-  --text: #223039;
-  --text-2: #4a5b66;
-  --muted: #7a8a95;
-  --primary: #5663c4;
-  --primary-2: #e4e8fa;
-  --primary-ink: #ffffff;
-  --good: #2f8a5b;   --good-bg: #e0f1e7;
-  --bad: #c25555;    --bad-bg: #f8e6e6;
-  --warn: #9a7326;   --warn-bg: #f7efd9;
-  --sec-R: #4f86c6;  --sec-L: #d9805a;  --sec-W: #3fa586;  --sec-S: #cfa04a;
-  --shadow: 0 1px 2px rgba(34,48,57,.05), 0 8px 24px rgba(34,48,57,.07);
-  --depth: 0 6px 0 -2px rgba(34,48,57,.14);
-  --orb1: #9fb4f5; --orb2: #9edbc4; --orb3: #f3c9a8;
+  --bg: #efe9fb; --bg-a: #f4eeff; --bg-b: #e8defa; --bg-c: #f6e9fb;
+  --surface: #faf7ff; --surface-2: #ece4fa; --border: #d8cbf2;
+  --text: #2b2050; --text-2: #5b4d86; --muted: #8678ad;
+  --primary: #6d4adf; --primary-2: #e7ddff; --primary-ink: #ffffff;
+  --good: #25906a;   --good-bg: #dff3ea;
+  --bad: #c4457a;    --bad-bg: #fbe4ee;
+  --warn: #99681f;   --warn-bg: #f8eed8;
+  --sec-R: #5a82e0;  --sec-L: #e0795a;  --sec-W: #34a98a;  --sec-S: #d19a2c;
+  --shr: 48, 28, 110;                 /* teinte des ombres (r, g, b) */
+  --shadow: 0 1px 2px rgba(var(--shr), .06), 0 10px 28px rgba(var(--shr), .10);
+  --depth: 0 6px 0 -2px rgba(var(--shr), .16);
+  --orb1: #b79cff; --orb2: #f2a8e6; --orb3: #9db4ff; --orb4: #d7b8ff; --blob-o: .55;
+  --pr: 109, 74, 223;                 /* particules (r, g, b) */
   --ease: cubic-bezier(.22,.9,.3,1);
 }
+/* ---------- Palette : violet profond (le « sombre » : violet foncé, jamais noir) ---------- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #101822; --surface: #182330; --surface-2: #213040; --border: #2c3d4e;
-    --text: #dfe7ee; --text-2: #aebcc8; --muted: #7f909e;
-    --primary: #8da0f2; --primary-2: #232d52; --primary-ink: #0d1424;
-    --good: #66cc9b; --good-bg: #173226; --bad: #ef8f8f; --bad-bg: #3a2023; --warn: #e0bd6a; --warn-bg: #352c15;
-    --sec-R: #6fa3dd; --sec-L: #e0905f; --sec-W: #55b997; --sec-S: #d9ab57;
-    --shadow: 0 8px 28px rgba(0,0,0,.35);
-    --depth: 0 6px 0 -2px rgba(0,0,0,.35);
-    --orb1: #3b4a9a; --orb2: #1f6b5a; --orb3: #6b4a3a;
+    --bg: #1f1640; --bg-a: #261a4d; --bg-b: #2d1a5c; --bg-c: #231447;
+    --surface: #2b2057; --surface-2: #372a6a; --border: #4c3d82;
+    --text: #f1ecff; --text-2: #cfc3ee; --muted: #a092c9;
+    --primary: #b9a0ff; --primary-2: #3e2f78; --primary-ink: #1c1240;
+    --good: #7fe0b4; --good-bg: #1f4141; --bad: #ff93b4; --bad-bg: #4c2348; --warn: #f3c874; --warn-bg: #4b3b30;
+    --sec-R: #86b4ff; --sec-L: #ffa27a; --sec-W: #62d6b3; --sec-S: #f3c35f;
+    --shr: 8, 3, 28;
+    --orb1: #7c4dff; --orb2: #d046c8; --orb3: #4f6bff; --orb4: #9b5cff; --blob-o: .5;
+    --pr: 222, 205, 255;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #101822; --surface: #182330; --surface-2: #213040; --border: #2c3d4e;
-  --text: #dfe7ee; --text-2: #aebcc8; --muted: #7f909e;
-  --primary: #8da0f2; --primary-2: #232d52; --primary-ink: #0d1424;
-  --good: #66cc9b; --good-bg: #173226; --bad: #ef8f8f; --bad-bg: #3a2023; --warn: #e0bd6a; --warn-bg: #352c15;
-  --sec-R: #6fa3dd; --sec-L: #e0905f; --sec-W: #55b997; --sec-S: #d9ab57;
-  --shadow: 0 8px 28px rgba(0,0,0,.35);
-  --depth: 0 6px 0 -2px rgba(0,0,0,.35);
-  --orb1: #3b4a9a; --orb2: #1f6b5a; --orb3: #6b4a3a;
+  --bg: #1f1640; --bg-a: #261a4d; --bg-b: #2d1a5c; --bg-c: #231447;
+  --surface: #2b2057; --surface-2: #372a6a; --border: #4c3d82;
+  --text: #f1ecff; --text-2: #cfc3ee; --muted: #a092c9;
+  --primary: #b9a0ff; --primary-2: #3e2f78; --primary-ink: #1c1240;
+  --good: #7fe0b4; --good-bg: #1f4141; --bad: #ff93b4; --bad-bg: #4c2348; --warn: #f3c874; --warn-bg: #4b3b30;
+  --sec-R: #86b4ff; --sec-L: #ffa27a; --sec-W: #62d6b3; --sec-S: #f3c35f;
+  --shr: 8, 3, 28;
+  --orb1: #7c4dff; --orb2: #d046c8; --orb3: #4f6bff; --orb4: #9b5cff; --blob-o: .5;
+  --pr: 222, 205, 255;
 }
 
-body { background: var(--bg); transition: background .4s; }
-body::before { /* aurore : grandes taches floues qui dérivent lentement + parallaxe souris */
-  content: ""; position: fixed; inset: -20vmax; z-index: -2; pointer-events: none;
-  background:
-    radial-gradient(38vmax 38vmax at calc(20% + var(--mx, 0) * 40px) calc(25% + var(--my, 0) * 30px), color-mix(in srgb, var(--orb1) 55%, transparent), transparent 70%),
-    radial-gradient(34vmax 34vmax at calc(80% - var(--mx, 0) * 30px) calc(30% + var(--my, 0) * 40px), color-mix(in srgb, var(--orb2) 50%, transparent), transparent 70%),
-    radial-gradient(40vmax 40vmax at calc(55% + var(--mx, 0) * 25px) calc(95% - var(--my, 0) * 30px), color-mix(in srgb, var(--orb3) 45%, transparent), transparent 70%);
-  filter: blur(30px);
-  animation: aurora 38s ease-in-out infinite alternate;
-}
-@keyframes aurora { from { transform: translate3d(-2%, -1%, 0) rotate(0deg) scale(1); } to { transform: translate3d(2%, 2%, 0) rotate(6deg) scale(1.08); } }
+body { background: var(--bg); color: var(--text); }
+::selection { background: color-mix(in srgb, var(--primary) 45%, transparent); }
+* { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--primary) 45%, transparent) transparent; }
 
-/* formes flottantes 3D en arrière-plan (injectées par motion.js) */
+/* ---------- Fond animé : dégradé qui respire + 4 nappes lumineuses + particules (canvas, motion.js) ---------- */
+#bgfx { position: fixed; inset: 0; z-index: -3; overflow: hidden; pointer-events: none;
+  background: linear-gradient(155deg, var(--bg-a), var(--bg-b) 55%, var(--bg-c)); background-size: 160% 160%;
+  animation: breathe 24s ease-in-out infinite alternate; }
+@keyframes breathe { from { background-position: 0% 0%; } to { background-position: 100% 100%; } }
+#bgfx .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: var(--blob-o); will-change: transform;
+  transform: translate3d(calc(var(--mx, 0) * var(--k, 30) * 1px), calc(var(--my, 0) * var(--k, 30) * 1px), 0); }
+#bgfx .blob i { display: block; width: 100%; height: 100%; border-radius: 50%; animation: var(--a) var(--d) ease-in-out infinite alternate; }
+#bgfx .b1 { --k: 40; --a: drift1; --d: 23s; width: 52vmax; height: 52vmax; left: -12vmax; top: -14vmax; }
+#bgfx .b2 { --k: -30; --a: drift2; --d: 29s; width: 46vmax; height: 46vmax; right: -12vmax; top: 6vmax; }
+#bgfx .b3 { --k: 25; --a: drift3; --d: 35s; width: 58vmax; height: 58vmax; left: 18vmax; bottom: -30vmax; }
+#bgfx .b4 { --k: -50; --a: drift4; --d: 19s; width: 30vmax; height: 30vmax; left: 38vw; top: 28vh; }
+#bgfx .b1 i { background: radial-gradient(circle at 40% 40%, var(--orb1), transparent 68%); }
+#bgfx .b2 i { background: radial-gradient(circle at 50% 50%, var(--orb2), transparent 68%); }
+#bgfx .b3 i { background: radial-gradient(circle at 50% 40%, var(--orb3), transparent 68%); }
+#bgfx .b4 i { background: radial-gradient(circle at 50% 50%, var(--orb4), transparent 66%); }
+@keyframes drift1 { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(22vw, 18vh, 0) scale(1.25); } }
+@keyframes drift2 { from { transform: translate3d(0, 0, 0) scale(1.1); } to { transform: translate3d(-26vw, 22vh, 0) scale(.85); } }
+@keyframes drift3 { from { transform: translate3d(-10vw, 0, 0) scale(.9); } to { transform: translate3d(18vw, -20vh, 0) scale(1.2); } }
+@keyframes drift4 { from { transform: translate3d(-14vw, -10vh, 0) scale(1); } to { transform: translate3d(16vw, 14vh, 0) scale(1.5); } }
+#bgparticles { position: fixed; inset: 0; z-index: -2; pointer-events: none; width: 100%; height: 100%; }
+
+/* formes flottantes 3D (injectées par motion.js) */
 #bg3d { position: fixed; inset: 0; z-index: -1; pointer-events: none; perspective: 900px; overflow: hidden; }
 #bg3d i {
   position: absolute; width: var(--s); height: var(--s); left: var(--x); top: var(--y);
-  border-radius: 28%; border: 1.5px solid color-mix(in srgb, var(--primary) 35%, transparent);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 12%, transparent), transparent 60%);
-  transform-style: preserve-3d; opacity: .55;
+  border-radius: 28%; border: 1.5px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 18%, transparent), transparent 62%);
+  transform-style: preserve-3d; opacity: .6;
   transform: translate3d(calc(var(--mx, 0) * var(--k) * 1px), calc(var(--my, 0) * var(--k) * 1px), 0) rotateX(var(--rx)) rotateY(var(--ry));
   animation: float3d var(--d) ease-in-out infinite alternate;
 }
-#bg3d i:nth-child(even) { border-radius: 50%; border-color: color-mix(in srgb, var(--sec-W) 35%, transparent); background: linear-gradient(135deg, color-mix(in srgb, var(--sec-W) 12%, transparent), transparent 60%); }
-#bg3d i:nth-child(3n) { border-color: color-mix(in srgb, var(--sec-L) 35%, transparent); background: linear-gradient(135deg, color-mix(in srgb, var(--sec-L) 12%, transparent), transparent 60%); }
+#bg3d i:nth-child(even) { border-radius: 50%; border-color: color-mix(in srgb, var(--orb2) 55%, transparent); background: linear-gradient(135deg, color-mix(in srgb, var(--orb2) 20%, transparent), transparent 62%); }
+#bg3d i:nth-child(3n) { border-color: color-mix(in srgb, var(--orb3) 55%, transparent); background: linear-gradient(135deg, color-mix(in srgb, var(--orb3) 20%, transparent), transparent 62%); }
 @keyframes float3d {
   from { rotate: x 0deg; translate: 0 0; }
   to   { rotate: x 40deg; translate: 0 -34px; }
@@ -83,7 +97,7 @@ body::before { /* aurore : grandes taches floues qui dérivent lentement + paral
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .2s, background .2s;
 }
 .card { background: color-mix(in srgb, var(--surface) 80%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 18px; }
-.brand-mark { background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 55%, var(--sec-W))); box-shadow: 0 6px 16px color-mix(in srgb, var(--primary) 40%, transparent); animation: spin3d 9s ease-in-out infinite; transform-style: preserve-3d; }
+.brand-mark { background: linear-gradient(135deg, var(--primary), var(--orb2)); box-shadow: 0 6px 16px color-mix(in srgb, var(--primary) 40%, transparent); animation: spin3d 9s ease-in-out infinite; transform-style: preserve-3d; }
 @keyframes spin3d { 0%, 55%, 100% { transform: perspective(300px) rotateY(0); } 70% { transform: perspective(300px) rotateY(180deg); } 85% { transform: perspective(300px) rotateY(360deg); } }
 #nav a { transition: background .2s, color .2s, transform .25s var(--ease); }
 #nav a:hover { transform: translateX(4px); }
@@ -91,8 +105,8 @@ body::before { /* aurore : grandes taches floues qui dérivent lentement + paral
 
 /* boutons : relief 3D, enfoncement au clic */
 .btn { border-radius: 12px; box-shadow: var(--depth); transform: translateY(0); transition: transform .12s, box-shadow .12s, background .2s, filter .2s; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 -2px rgba(34,48,57,.14), 0 10px 18px rgba(34,48,57,.10); }
-.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 -1px rgba(34,48,57,.2); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 -2px rgba(var(--shr), .16), 0 10px 18px rgba(var(--shr), .12); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 -1px rgba(var(--shr), .25); }
 .btn.ghost, .btn.sm.ghost { box-shadow: none; }
 .btn.primary { background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 88%, #fff), var(--primary)); box-shadow: 0 6px 0 -2px color-mix(in srgb, var(--primary) 55%, #000), 0 10px 18px color-mix(in srgb, var(--primary) 25%, transparent); }
 .btn.primary:hover { filter: none; box-shadow: 0 8px 0 -2px color-mix(in srgb, var(--primary) 55%, #000), 0 14px 22px color-mix(in srgb, var(--primary) 30%, transparent); }
@@ -101,13 +115,13 @@ body::before { /* aurore : grandes taches floues qui dérivent lentement + paral
 
 /* réponses QCM : léger soulèvement, retournement à la correction */
 .opt { border-radius: 14px; }
-.opt:hover:not(:disabled) { transform: translateY(-2px) translateZ(0); box-shadow: 0 8px 20px rgba(34,48,57,.10); }
+.opt:hover:not(:disabled) { transform: translateY(-2px) translateZ(0); box-shadow: 0 8px 20px rgba(var(--shr), .12); }
 .opt.sel { box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 35%, transparent); }
 .opt.right { animation: pop3d .55s var(--ease); }
 .opt.wrong { animation: shake .4s; }
 @keyframes pop3d { 0% { transform: perspective(500px) rotateX(-25deg) scale(.96); } 100% { transform: none; } }
 @keyframes shake { 20%,60% { transform: translateX(-5px); } 40%,80% { transform: translateX(5px); } }
-.chunk:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(34,48,57,.12); }
+.chunk:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(var(--shr), .16); }
 .slot .chunk { animation: pop3d .35s var(--ease); }
 
 /* ---------- Entrées animées (3D) ---------- */
@@ -119,8 +133,8 @@ body::before { /* aurore : grandes taches floues qui dérivent lentement + paral
 .stage > * { animation: flip3d .6s var(--ease) both; transform-origin: 50% 0; }
 @keyframes rise3d { from { opacity: 0; transform: translate3d(0, 22px, -60px) rotateX(8deg); } to { opacity: 1; transform: none; } }
 @keyframes flip3d { from { opacity: 0; transform: perspective(1200px) rotateX(-9deg) translateY(18px); } to { opacity: 1; transform: none; } }
-.bar > span { transition: width .9s var(--ease); background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 55%, var(--sec-W))); }
-.hero-num { background: linear-gradient(135deg, var(--primary), var(--sec-W)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.bar > span { transition: width .9s var(--ease); background: linear-gradient(90deg, var(--primary), var(--orb2)); }
+.hero-num { background: linear-gradient(135deg, var(--primary), var(--orb2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .progress-dots i { transition: background .3s, transform .3s var(--ease); }
 .progress-dots i.cur { transform: scale(1.5); background: var(--primary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 25%, transparent); }
 #toast { border-radius: 14px; box-shadow: 0 12px 30px rgba(0,0,0,.25); transform: translate(-50%, 12px); transition: opacity .3s, transform .3s var(--ease); }
@@ -128,7 +142,7 @@ body::before { /* aurore : grandes taches floues qui dérivent lentement + paral
 
 /* inclinaison 3D au survol (pilotée par motion.js via --rx / --ry) */
 .tilt { transform-style: preserve-3d; transform: perspective(900px) rotateX(var(--trx, 0deg)) rotateY(var(--try, 0deg)) translateZ(0); transition: transform .25s var(--ease), box-shadow .25s; will-change: transform; }
-.tilt.hot { box-shadow: 0 22px 40px rgba(34,48,57,.16); transition: transform .06s linear, box-shadow .25s; }
+.tilt.hot { box-shadow: 0 22px 40px rgba(var(--shr), .22); transition: transform .06s linear, box-shadow .25s; }
 .tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s; background: radial-gradient(260px circle at var(--gx, 50%) var(--gy, 50%), color-mix(in srgb, #fff 38%, transparent), transparent 60%); }
 .tilt { position: relative; }
 .tilt.hot::after { opacity: .5; }
@@ -178,9 +192,27 @@ body.in-session #view { max-width: none; padding: 14px clamp(16px, 3vw, 56px) 40
   .stage { min-height: auto; }
 }
 
+
+/* ---------- DA violette : détails ---------- */
+#sidebar { background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 82%, transparent), color-mix(in srgb, var(--bg-b) 70%, transparent)); border-right-color: color-mix(in srgb, var(--primary) 22%, var(--border)); }
+#nav a.active { background: linear-gradient(90deg, color-mix(in srgb, var(--primary) 26%, transparent), transparent); box-shadow: inset 3px 0 0 var(--primary); color: var(--text); }
+.card { border-color: color-mix(in srgb, var(--primary) 18%, var(--border)); box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.07); }
+h1 { background: linear-gradient(100deg, var(--text) 30%, var(--primary)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.callout { background: color-mix(in srgb, var(--primary) 14%, var(--surface)); }
+input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 22%, transparent); }
+.btn.primary { background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 80%, #fff), var(--primary) 55%, color-mix(in srgb, var(--primary) 70%, var(--orb2))); }
+.btn:not(.primary):not(.ghost):hover { border-color: color-mix(in srgb, var(--primary) 55%, var(--border)); }
+.opt:hover:not(:disabled), .chunk:hover { border-color: var(--primary); }
+.bar { background: color-mix(in srgb, var(--primary) 14%, var(--surface-2)); }
+.timer { background: color-mix(in srgb, var(--primary) 16%, var(--surface-2)); }
+.ctw-input { background: color-mix(in srgb, var(--primary) 18%, var(--surface)); }
+.brand-mark { background: linear-gradient(135deg, var(--primary), var(--orb2)); color: var(--primary-ink); box-shadow: 0 6px 18px color-mix(in srgb, var(--primary) 45%, transparent); }
+.speaker-avatar { background: color-mix(in srgb, var(--primary) 14%, var(--surface)); }
+.wave i { background: linear-gradient(180deg, var(--primary), var(--orb2)); }
+
 /* ---------- Accessibilité : réduire les animations ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
   .tilt { transform: none !important; }
-  #bg3d { display: none; }
+  #bg3d, #bgparticles { display: none; }
 }

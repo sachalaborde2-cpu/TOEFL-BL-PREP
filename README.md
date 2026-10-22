@@ -37,9 +37,10 @@ Le suivi est enregistré dans la progression (`bags`, `cycles`, `lv`). Une ancie
 
 ## Interface
 
-- Thème « Aurora » (`app/css/theme.css`) : tons doux bleu-gris et vert sauge, sans blanc ni noir purs, clair et sombre automatiques.
-- Mouvement 3D (`app/js/motion.js`) : formes flottantes en arrière-plan, parallaxe à la souris, cartes inclinables, boutons en relief, entrées animées. Tout est coupé si ton système demande de réduire les animations.
-- Exercices en plein écran : pendant une séance, le menu se réduit à des icônes et la zone d'exercice occupe toute la page. Le texte s'agrandit avec la fenêtre (paragraphe à trous, phrases à reconstruire, éditeur).
+- **Direction artistique violette** (`app/css/theme.css`). Le mode sombre est un **violet profond, jamais noir** ; le mode clair est une lavande douce. Réglages > Thème : Automatique (suit ton système), Lavande clair, Violet profond.
+- **Fond animé** : un dégradé qui respire, quatre nappes lumineuses violettes, roses et bleues qui dérivent en continu, des particules qui scintillent et montent doucement (canvas léger, ~35 images/s, en pause quand l'onglet est caché), et des formes 3D flottantes. La souris déplace légèrement les couches (parallaxe).
+- **Mouvement 3D** (`app/js/motion.js`) : cartes qui s'inclinent au survol, boutons en relief qui s'enfoncent, entrées animées. Tout est coupé si ton système demande de réduire les animations : le fond reste alors un dégradé fixe.
+- **Exercices en plein écran** : pendant une séance, le menu se réduit à des icônes et la zone d'exercice occupe toute la page. Le texte s'agrandit avec la fenêtre (paragraphe à trous, phrases à reconstruire, éditeur).
 
 ## Correction automatique par l'IA (optionnel, gratuit)
 
