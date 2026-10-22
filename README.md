@@ -17,12 +17,12 @@ Tu peux aussi la lancer à la main : `python3 server.py`, puis ouvre http://loca
 | Mon plan | 5 phases jusqu'au jour J, calendrier des tests blancs, priorités recalculées chaque jour |
 | Entraînement | Les 12 types de tâches 2026, avec une fiche méthode par tâche |
 | Tests blancs | Diagnostic, 3 tests blancs fixes + tests aléatoires, Reading/Listening adaptatifs |
-| Vocabulaire | 205 mots + tes propres mots ajoutés depuis les exercices académiques, finance et idiomes, en répétition espacée + mode orthographe |
+| Vocabulaire | 205 mots académiques, finance et idiomes, plus tes propres mots ajoutés depuis les exercices ; répétition espacée + mode orthographe |
 | Carnet d'erreurs | Chaque erreur revient jusqu'à 2 réussites consécutives |
 | Suivi | Courbes de progression, activité, historique des productions corrigées |
 | Guide | Analyse du test, correspondances score/CECRL, stratégies, checklist du jour J |
 
-Banque d'exercices (tous niveaux B2, C1 ou C2) : 240 paragraphes Complete the Words, 120 documents du quotidien, 30 textes académiques, 492 répliques, 58 conversations, 28 annonces, 32 mini-cours, 210 phrases à reconstruire, 30 e-mails, 30 discussions, 24 séries Listen & Repeat et 28 entretiens, avec réponses modèles de niveau C1. Toutes les séquences ont été relues une à une (réponses, langue, faits, niveau).
+Banque d'exercices (tous niveaux B2, C1 ou C2) : 240 paragraphes Complete the Words, 120 documents du quotidien, 60 textes académiques, 492 répliques, 116 conversations, 56 annonces, 63 mini-cours, 420 phrases à reconstruire, 60 e-mails, 60 discussions, 48 séries Listen & Repeat et 56 entretiens, avec réponses modèles de niveau C1. Les séquences d'origine ont été relues une à une (réponses, langue, faits, niveau) ; les nouvelles ont été relues par leur auteur et contrôlées par échantillon.
 
 ## Tirage des exercices : aléatoire, sans répétition, adapté à ton niveau
 
@@ -66,5 +66,5 @@ Navigateur conseillé : **Google Chrome** (voix de synthèse et reconnaissance v
 
 ## État du chantier
 
-- Fait : niveau adaptatif (minimum B2), relecture complète de toutes les banques, doublement des paragraphes à trous, des documents du quotidien et des répliques.
-- À faire : doubler les conversations, mini-cours, textes académiques, annonces, phrases à reconstruire, e-mails, discussions et exercices d'oral, avec une majorité de C1 et C2 pour remplir les tranches de niveau élevées. Les textes académiques et annonces sont déjà écrits mais pas encore relus ni branchés.
+- Fait : niveau adaptatif (minimum B2), relecture complète des banques d'origine, doublement de **tous** les types d'exercices, direction artistique violette avec fond animé, ajout de mots au vocabulaire depuis les exercices.
+- Pistes : une relecture croisée des nouvelles séquences par un second relecteur (surtout les distracteurs des répliques B2, parfois simples), et davantage de séquences C2 pour les types encore peu fournis (phrases à reconstruire, textes académiques).
