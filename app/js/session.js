@@ -39,7 +39,7 @@ function runPractice(view, type, items, { title, review = null } = {}) {
       <p class="t2">${meta.unit === 'phrase' || meta.unit === 'réplique' ? `${Math.round(got)}/${tot} correct(s)` : `score moyen sur ${items.length} ${meta.unit}${items.length > 1 ? 's' : ''}`}</p>
       <hr><div class="row" style="justify-content:center;gap:28px">
         <div class="kpi"><span class="label">Niveau estimé sur cette tâche</span><span class="value">${fmtBand(st.band)}</span><span class="sub">${bandCefr(st.band)} · objectif ${Estimator.targetBand()}</span></div>
-        <div class="kpi"><span class="label">Items faits au total</span><span class="value">${st.count}</span><span class="sub">${Content.unseenCount(type)} inédits restants</span></div>
+        <div class="kpi"><span class="label">Items faits au total</span><span class="value">${st.count}</span><span class="sub">${Content.unseenCount(type)} restants avant le prochain cycle</span></div>
       </div>
       <div class="row mt2" style="justify-content:center"><a class="btn" href="#/">Tableau de bord</a><a class="btn" href="#/errors">Carnet d'erreurs</a><button class="btn primary again">Encore ${items.length} →</button></div></div>`;
     $('.again', stage).onclick = () => { const more = Content.pick(type, items.length); if (!more.length) return toast('Plus de contenu disponible'); runPractice(view, type, more, { title }); };

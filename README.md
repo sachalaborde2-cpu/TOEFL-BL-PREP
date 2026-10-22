@@ -22,7 +22,19 @@ Tu peux aussi la lancer à la main : `python3 server.py`, puis ouvre http://loca
 | Suivi | Courbes de progression, activité, historique des productions corrigées |
 | Guide | Analyse du test, correspondances score/CECRL, stratégies, checklist du jour J |
 
-Banque d'exercices : 30 paragraphes Complete the Words, 30 documents du quotidien, 16 textes académiques, 96 répliques, 30 conversations, 14 annonces, 18 mini-cours, 80 phrases à reconstruire, 12 e-mails, 12 discussions, 10 séries Listen & Repeat et 12 entretiens, avec réponses modèles de niveau C1.
+Banque d'exercices : 120 paragraphes Complete the Words, 60 documents du quotidien, 30 textes académiques, 246 répliques, 58 conversations, 28 annonces, 32 mini-cours, 210 phrases à reconstruire, 30 e-mails, 30 discussions, 24 séries Listen & Repeat et 28 entretiens, avec réponses modèles de niveau C1.
+
+## Tirage des exercices : aléatoire, sans répétition
+
+Pour chaque tâche, les séquences sont tirées **complètement au hasard** parmi celles que tu n'as pas encore faites. Aucune ne revient avant que tu aies fait **toutes** les autres : quand le stock est épuisé, un message l'annonce et le cycle repart de zéro. La page Entraînement affiche ce qu'il reste dans le cycle en cours. Les tests blancs adaptatifs gardent leur sélection par difficulté (B1 / B2 / C1) pour le module 2.
+
+Le suivi des cycles est enregistré dans la progression (`bags` et `cycles`). Une ancienne sauvegarde reste compatible : le cycle en cours est reconstruit à partir de ce que tu as déjà fait.
+
+## Interface
+
+- Thème « Aurora » (`app/css/theme.css`) : tons doux bleu-gris et vert sauge, sans blanc ni noir purs, clair et sombre automatiques.
+- Mouvement 3D (`app/js/motion.js`) : formes flottantes en arrière-plan, parallaxe à la souris, cartes inclinables, boutons en relief, entrées animées. Tout est coupé si ton système demande de réduire les animations.
+- Exercices en plein écran : pendant une séance, le menu se réduit à des icônes et la zone d'exercice occupe toute la page. Le texte s'agrandit avec la fenêtre (paragraphe à trous, phrases à reconstruire, éditeur).
 
 ## Correction automatique par l'IA (optionnel, gratuit)
 
@@ -31,5 +43,7 @@ Colle une clé **Google Gemini** (gratuite sur https://aistudio.google.com/app/a
 ## Données
 
 La progression est sauvegardée automatiquement dans `data/progression.json`, avec une copie par jour dans `data/sauvegardes/`. Ces fichiers restent en local et ne sont pas versionnés.
+
+**Changer d'ordinateur :** le code se récupère avec `git pull`, mais la progression ne passe pas par GitHub. Dans Réglages, clique sur **⬇ Exporter (JSON)** à la fin de chaque séance, copie le fichier sur ton Google Drive, puis **⬆ Importer** sur l'autre machine. Importe toujours le fichier le plus récent avant de travailler : l'import remplace toute la progression locale.
 
 Navigateur conseillé : **Google Chrome** (voix de synthèse et reconnaissance vocale pour le Speaking). Pour des voix plus naturelles sur Mac : Réglages Système → Accessibilité → Contenu énoncé → Voix du système → télécharger les voix anglaises « Améliorée ».

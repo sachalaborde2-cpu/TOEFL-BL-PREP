@@ -259,7 +259,7 @@ function pagePlan(view) {
     <div class="card"><h2>Les règles du plan</h2><ul class="fb-list">
       <li><b>Tous les jours :</b> 10 min de vocabulaire (répétition espacée) — c'est le socle de Complete the Words et du Reading C1.</li>
       <li><b>Priorité aux écarts :</b> chaque tâche reçoit un poids = (objectif − niveau estimé) × (jours sans pratique). Tu travailles donc surtout ce qui rapporte le plus de points.</li>
-      <li><b>Difficulté adaptative :</b> les exercices proposés montent en difficulté (B1 → B2 → C1) quand ta réussite dépasse 55 % puis 80 %.</li>
+      <li><b>Tirage aléatoire sans répétition :</b> les séquences d'une tâche sont tirées au hasard, et aucune ne revient avant que tu aies fait toutes les autres.</li>
       <li><b>Carnet d'erreurs :</b> chaque erreur revient jusqu'à ce que tu la réussisses 2 fois de suite.</li>
       <li><b>Tests blancs :</b> adaptatifs comme le vrai test (module 2 plus dur si tu réussis le module 1), audio unique, chronos stricts.</li>
       <li><b>Oral tous les 2 jours minimum :</b> le Speaking (Listen & Repeat) récompense la régularité — fais aussi 10 min de <i>shadowing</i> sur un podcast.</li></ul>
@@ -270,13 +270,13 @@ function pagePlan(view) {
    ENTRAÎNEMENT
    ========================================================= */
 function pageTrain(view) {
-  view.innerHTML = `<h1>Entraînement</h1><p class="t2">Les 12 tâches du TOEFL iBT 2026. Chaque exercice est corrigé et expliqué ; la difficulté s'adapte à ton niveau. Commence par « Méthode » si tu découvres une tâche.</p>
+  view.innerHTML = `<h1>Entraînement</h1><p class="t2">Les 12 tâches du TOEFL iBT 2026. Chaque exercice est corrigé et expliqué. Les séquences sont tirées au hasard, sans répétition : tu refais tout le stock d'une tâche avant de repartir de zéro. Commence par « Méthode » si tu découvres une tâche.</p>
     ${['R', 'L', 'W', 'S'].map((s) => `<h2 class="mt2"><i class="dot ${s}"></i> ${SECTIONS[s].name} <span class="muted small">· ${SECTIONS[s].fr} · estimé ${fmtBand(Estimator.section(s))}</span></h2>
     <div class="grid g3">${SEC_TYPES[s].map((t) => {
-      const st = Estimator.typeStats(t); const total = Content.all(t).length;
+      const st = Estimator.typeStats(t); const total = Content.cycleTotal(t);
       const opts = { ctw: [1, 3, 5], dl: [2, 4, 6], ap: [1, 2, 3], lcr: [8, 16, 24], conv: [2, 4, 6], ann: [2, 3, 4], talk: [1, 2, 3], bas: [5, 10, 15], email: [1], disc: [1], rep: [1, 2], int: [1] }[t];
       return `<div class="card task-card"><div class="row between"><b>${TYPES[t].name}</b>${st.band != null ? `<span class="pill ${s}">${fmtBand(st.band)}</span>` : ''}</div>
-        <div class="meta">${TYPES[t].fr} · ${st.count} fait(s) · ${Content.unseenCount(t)}/${total} inédits${st.acc != null ? ' · réussite ' + pct(st.acc) : ''}</div>
+        <div class="meta">${TYPES[t].fr} · ${st.count} fait(s) · ${Content.unseenCount(t)}/${total} restants dans le cycle${Content.cycleNo(t) > 1 ? ' n°' + Content.cycleNo(t) : ''}${st.acc != null ? ' · réussite ' + pct(st.acc) : ''}</div>
         <div class="row"><a class="btn sm" href="#/strategy/${t}">Méthode</a>${opts.map((n) => `<a class="btn sm primary" href="#/practice/${t}?n=${n}">${n} ${n > 1 ? '' : ''}${TYPES[t].unit.split(' ')[0]}${n > 1 && !TYPES[t].unit.includes('(') ? 's' : ''}</a>`).join('')}</div></div>`;
     }).join('')}</div>`).join('')}`;
 }

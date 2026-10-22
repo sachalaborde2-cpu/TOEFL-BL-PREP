@@ -92,6 +92,8 @@ function defaultState() {
     profile: null,
     attempts: [],   // {ts,type,id,mode,score(0-1),n,diff}
     seen: {},       // "type:id" -> ts
+    bags: null,     // type -> ids faits dans le cycle en cours (null = à reconstruire depuis `seen`)
+    cycles: {},     // type -> nombre de cycles complets terminés
     mocks: [],      // rapports de tests blancs
     errors: [],     // carnet d'erreurs
     vocab: {},      // mot -> {box,due,right,wrong}
@@ -156,22 +158,48 @@ const Content = {
     }
     return set;
   },
-  /* Choisit n items non vus en priorité, avec une difficulté adaptée au niveau actuel */
+  /* « Sac » du cycle en cours pour un type : ids déjà faits depuis le dernier tour complet.
+     Première utilisation sur une ancienne sauvegarde : on le reconstruit à partir de `seen`. */
+  bag(type) {
+    const s = Store.s;
+    if (!s.bags) {
+      s.bags = {};
+      for (const k of Object.keys(s.seen || {})) { const i = k.indexOf(':'); (s.bags[k.slice(0, i)] = s.bags[k.slice(0, i)] || []).push(k.slice(i + 1)); }
+    }
+    return (s.bags[type] = s.bags[type] || []);
+  },
+  /* Choisit n items au hasard parmi ceux pas encore faits dans le cycle en cours.
+     Quand tout a été fait (voir markDone), le cycle repart de zéro. `diffs` (tests blancs adaptatifs) filtre par difficulté. */
   pick(type, n, { exclude = new Set(), diffs = null, allowReserved = false } = {}) {
     const reserved = allowReserved ? new Set() : this.reservedIds();
-    let pool = this.all(type).filter((x) => !exclude.has(type + ':' + x.id) && !reserved.has(type + ':' + x.id));
-    if (!pool.length) pool = this.all(type).filter((x) => !exclude.has(type + ':' + x.id));
-    const seen = Store.s.seen;
-    const target = diffs || Estimator.targetDiffs(type);
-    const scoreOf = (x) => {
-      const last = seen[type + ':' + x.id] || 0;
-      const fresh = last ? Math.min(1, (Date.now() - last) / (30 * 86400000)) : 2; // non vu = priorité
-      const dOk = target.includes(x.diff || 2) ? 1 : 0;
-      return fresh * 2 + dOk + Math.random() * 0.6;
-    };
-    return pool.map((x) => [scoreOf(x), x]).sort((a, b) => b[0] - a[0]).slice(0, n).map((p) => p[1]);
+    const base = (x) => !exclude.has(type + ':' + x.id);
+    let pool = this.all(type).filter((x) => base(x) && !reserved.has(type + ':' + x.id));
+    if (diffs) { const d = pool.filter((x) => diffs.includes(x.diff || 2)); if (d.length >= n) pool = d; }
+    if (!pool.length) pool = this.all(type).filter(base);
+    const done = new Set(this.bag(type));
+    const fresh = shuffle(pool.filter((x) => !done.has(x.id)));
+    const out = fresh.slice(0, n);
+    if (out.length < n) { // il reste moins de n inédits dans le cycle : on complète au hasard
+      const taken = new Set(out.map((x) => x.id));
+      out.push(...shuffle(pool.filter((x) => !taken.has(x.id))).slice(0, n - out.length));
+    }
+    return out;
   },
-  unseenCount(type) { return this.all(type).filter((x) => !Store.s.seen[type + ':' + x.id]).length; },
+  /* Appelé quand un item est terminé : l'ajoute au cycle, et relance le cycle quand tout a été fait */
+  markDone(type, id) {
+    const s = Store.s; const bag = this.bag(type);
+    if (!bag.includes(id)) bag.push(id);
+    const reserved = this.reservedIds(); const done = new Set(bag);
+    const pool = this.all(type).filter((x) => !reserved.has(type + ':' + x.id));
+    if (pool.length && pool.every((x) => done.has(x.id))) {
+      s.bags[type] = []; s.cycles = s.cycles || {}; s.cycles[type] = (s.cycles[type] || 0) + 1;
+      toast(`Cycle terminé : tu as fait les ${pool.length} exercices de « ${TYPES[type] ? TYPES[type].name : type} ». On repart de zéro !`, 4200);
+    }
+  },
+  /* Exercices restants dans le cycle en cours */
+  unseenCount(type) { const done = new Set(this.bag(type)); const reserved = this.reservedIds(); return this.all(type).filter((x) => !done.has(x.id) && !reserved.has(type + ':' + x.id)).length; },
+  cycleTotal(type) { const reserved = this.reservedIds(); return this.all(type).filter((x) => !reserved.has(type + ':' + x.id)).length; },
+  cycleNo(type) { return ((Store.s.cycles || {})[type] || 0) + 1; },
 };
 
 /* ---------- Enregistrement des résultats ---------- */
@@ -180,6 +208,7 @@ const Record = {
     const s = Store.s;
     s.attempts.push({ ts: Date.now(), type, id, mode, score: Math.round(score * 1000) / 1000, n, diff });
     s.seen[type + ':' + id] = Date.now();
+    Content.markDone(type, id);
     Store.save();
   },
   minutes(min) {
@@ -470,6 +499,7 @@ const App = {
     const q = Object.fromEntries(new URLSearchParams(qs || ''));
     this.leave();
     const view = $('#view'); view.innerHTML = ''; window.scrollTo(0, 0);
+    document.body.classList.toggle('in-session', /^\/(practice|mock|review)(\/|$)/.test(path)); // exercices en plein écran
     for (const [pat, fn] of this.routes) {
       const m = path.match(pat);
       if (m) {

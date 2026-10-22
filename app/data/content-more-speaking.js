@@ -1,0 +1,278 @@
+/* SPEAKING (extra bank) — Listen and Repeat (rx001-rx014) + Take an Interview (ix001-ix016) */
+CONTENT.rep.push(
+  { id: 'rx001', diff: 1, g: 'W', ctx: 'You are working in the campus cafeteria. Listen to the kitchen supervisor and repeat what she says.', s: [
+    'Lunch starts at noon.',
+    'Please wipe the tables after each customer.',
+    'Vegetarian meals are on the left side of the counter.',
+    'Fresh fruit should be replaced as soon as it looks tired.',
+    'If a student mentions an allergy, check the ingredient list before you answer.',
+    'The new payment system accepts student cards, but it doesn\'t work when the network is down.',
+    'Whatever is left over at closing time must be recorded, so that we can reduce waste and plan tomorrow\'s menu more accurately.'] },
+  { id: 'rx002', diff: 1, g: 'M', ctx: 'You are a resident assistant in a student dormitory. Listen to the housing manager and repeat what he says.', s: [
+    'Quiet hours begin at ten.',
+    'Visitors must sign in at the front desk.',
+    'The laundry room is on the basement level.',
+    'Please report any broken equipment as soon as you notice it.',
+    'Residents who lose their keys will be charged a replacement fee of twenty dollars.',
+    'During the winter break, the building will remain open only for students who have registered in advance.',
+    'If a resident complains about noise, you should speak to the neighbors politely before involving the security staff.'] },
+  { id: 'rx003', diff: 1, g: 'W', ctx: 'You are a student assistant at the university IT help desk. Listen to your supervisor and repeat what she says.', s: [
+    'Ask for the student number first.',
+    'Most problems can be solved by restarting the computer.',
+    'Passwords must be changed every six months.',
+    'The wireless network is slower in the older buildings.',
+    'Whenever a user reports a suspicious email, tell them not to click on any link.',
+    'Printing credit can be added online, but it may take a few minutes to appear on the account.',
+    'Unless the problem is urgent, requests that arrive after five o\'clock will be handled on the following working day.'] },
+  { id: 'rx004', diff: 3, g: 'M', ctx: 'You are interning at a bank on campus. Listen to the branch manager and repeat what he says.', s: [
+    'Welcome to the student bank.',
+    'Please greet every customer with a smile.',
+    'Opening an account takes about fifteen minutes.',
+    'Foreign students need to show their passport and their visa.',
+    'Customers who want to send money abroad should check the exchange rate first.',
+    'The savings account offers a modest interest rate, but there are no monthly fees for students.',
+    'Although most transactions can now be completed on the mobile app, some customers still prefer to speak to an advisor in person.'] },
+  { id: 'rx005', diff: 2, g: 'W', ctx: 'You are a volunteer guide at an art museum. Listen to the museum educator and repeat what she says.', s: [
+    'Please stay behind the line.',
+    'Photographs are allowed, but flash is not.',
+    'This painting was completed in eighteen eighty-six.',
+    'The artist spent most of her life in a small village near the coast.',
+    'If visitors ask about the technique, explain that the colors were mixed by hand.',
+    'Many of the works in this room were donated by families who wanted them to remain in the city.',
+    'The restoration, which took almost three years, revealed a second portrait hidden beneath the surface of the canvas.'] },
+  { id: 'rx006', diff: 1, g: 'M', ctx: 'You are helping at a community garden run by the university. Listen to the project leader and repeat what he says.', s: [
+    'Gloves are in the shed.',
+    'Water the plants early in the morning.',
+    'The tomatoes will be ready in about two weeks.',
+    'Every volunteer is asked to work at least three hours a month.',
+    'Please don\'t pick anything unless you have checked with one of the coordinators.',
+    'The compost bins have to be turned regularly, otherwise the material will take much longer to break down.',
+    'Since the vegetables are shared among all the participants, we keep a record of who has taken what each week.'] },
+  { id: 'rx007', diff: 2, g: 'W', ctx: 'You are a student ambassador at a career fair. Listen to the event coordinator and repeat what she says.', s: [
+    'The fair opens at nine.',
+    'Please wear your name badge at all times.',
+    'Each company has its own table in the main hall.',
+    'Students should bring several copies of their resume.',
+    'If a recruiter asks for your contact details, remember to give them your professional email address.',
+    'More than fifty employers will be present this year, including several that are hiring for summer internships.',
+    'Students who attend the preparation workshop beforehand are much more likely to make a good impression on the recruiters.'] },
+  { id: 'rx008', diff: 2, g: 'M', ctx: 'You are attending an introductory astronomy lecture. Listen to the professor and repeat what he says.', s: [
+    'Today we will talk about stars.',
+    'The sun is the closest star to Earth.',
+    'Light from the sun takes about eight minutes to reach us.',
+    'Stars are formed inside enormous clouds of gas and dust.',
+    'The color of a star depends mainly on its surface temperature.',
+    'Astronomers measure the distance to nearby stars by observing how their position appears to change over six months.',
+    'Although the universe contains billions of galaxies, only a tiny fraction of them can be seen without a powerful telescope.'] },
+  { id: 'rx009', diff: 3, g: 'W', ctx: 'You are attending a lecture in an introductory economics course. Listen to the professor and repeat what she says.', s: [
+    'Prices send signals to the market.',
+    'When demand rises, prices usually go up.',
+    'A monopoly exists when one company controls an entire market.',
+    'Inflation reduces the purchasing power of a currency over time.',
+    'Governments often use taxes to influence the behavior of consumers and producers.',
+    'The central bank can slow down the economy by raising interest rates, which makes borrowing more expensive.',
+    'If a product has close substitutes, consumers will react to a price increase much more strongly than they would otherwise.'] },
+  { id: 'rx010', diff: 2, g: 'M', ctx: 'You are working as a referee assistant at a university sports tournament. Listen to the tournament director and repeat what he says.', s: [
+    'The first match starts at ten.',
+    'Teams must arrive thirty minutes early.',
+    'Every player needs to show a valid student card.',
+    'The final will be played on the main field on Sunday afternoon.',
+    'If it rains heavily, the matches will be moved to the indoor courts.',
+    'Players who receive two yellow cards in the same match will be asked to leave the field immediately.',
+    'The winning team will represent the university at the regional championship, provided that all its members remain enrolled this semester.'] },
+  { id: 'rx011', diff: 2, g: 'W', ctx: 'You are a new assistant at the university health center. Listen to the nurse in charge and repeat what she says.', s: [
+    'Please take a number.',
+    'The doctor sees patients by appointment.',
+    'Flu vaccines are free for all students.',
+    'Bring your insurance card to every visit.',
+    'Anyone with a high fever should wait in the isolation room.',
+    'The counseling service offers confidential sessions, and students can book them online at any time.',
+    'Patients who need to see a specialist will receive a referral letter, which must be presented at the hospital on the day of the appointment.'] },
+  { id: 'rx012', diff: 2, g: 'M', ctx: 'You are tutoring at the university language center. Listen to the center director and repeat what he says.', s: [
+    'Conversation groups meet on Tuesdays.',
+    'Each session lasts about an hour.',
+    'New students take a short placement test.',
+    'Beginners usually progress faster when they practice every day.',
+    'Tutors should correct serious mistakes without interrupting the conversation too often.',
+    'Students are encouraged to bring an article or a short video that they would like to discuss with the group.',
+    'The center has recently expanded its collection of audio materials, which learners can borrow for two weeks free of charge.'] },
+  { id: 'rx013', diff: 3, g: 'W', ctx: 'You are helping with a university research project in psychology. Listen to the lead researcher and repeat what she says.', s: [
+    'Participants arrive at two.',
+    'Please read the consent form carefully.',
+    'Each person will complete a short questionnaire.',
+    'The experiment takes about forty-five minutes in total.',
+    'Participants are free to withdraw from the study at any moment without giving a reason.',
+    'All the data will be stored anonymously, and only the research team will have access to the files.',
+    'Because the results depend on spontaneous reactions, we ask you not to explain the purpose of the study until everyone has finished.'] },
+  { id: 'rx014', diff: 3, g: 'M', ctx: 'You are a member of the stage crew in the university theater club. Listen to the director and repeat what he says.', s: [
+    'Rehearsal begins at seven.',
+    'Please turn off your phones.',
+    'The costumes are stored backstage.',
+    'Actors should know their lines by the end of this week.',
+    'The lighting technician needs to see the whole scene before making any changes.',
+    'Tickets for the opening night sold out in less than two days, which has never happened in the history of the club.',
+    'Had we started rehearsing earlier in the semester, we would probably have had time to improve the final scene as well.'] }
+);
+
+CONTENT.int.push(
+  { id: 'ix001', diff: 1, g: 'W', topic: 'Food and cooking', ctx: 'You have agreed to take part in a university study about students\' eating habits. A researcher will ask you four questions.', q: [
+    'How often do you cook for yourself, and what kinds of meals do you usually prepare?',
+    'Do you think it is better to eat at home or to eat out when you are a student? Why?',
+    'Some people say that fast food should be taxed because it is unhealthy. What do you think about this idea?',
+    'Is there a traditional dish from your culture that you would recommend to a visitor? Please describe it.'],
+    m: [
+      'I cook most evenings, usually simple dishes like pasta with vegetables, rice with chicken, or a big salad. I try to prepare enough for two meals, so that I can take the leftovers to university the next day. It saves time, and it\'s also much cheaper than buying a sandwich every lunchtime.',
+      'I think eating at home is better for most students, mainly because of the budget. Even a basic meal costs a third of a restaurant meal. It\'s usually healthier too, because you control the ingredients. That said, I enjoy eating out once or twice a month with friends, since it\'s also a social activity and a way to relax.',
+      'I understand the logic, but I\'m not sure a tax alone would work. Fast food is often the cheapest option, so a tax would mostly affect low-income families. I\'d rather see governments make healthy food cheaper, for example by reducing taxes on fruit and vegetables, and by improving the quality of school meals.',
+      'I would definitely recommend a dish called raclette, which is typical of the Alps. You melt cheese and pour it over potatoes, ham, and pickles. It\'s not a light meal, but it\'s very friendly, because everyone sits around the same table and shares. It\'s the perfect dish for a cold evening with friends or family.'] },
+  { id: 'ix002', diff: 2, g: 'M', topic: 'Friendship', ctx: 'You are participating in a research project about social relationships among young adults. An interviewer will ask you some questions.', q: [
+    'How did you meet your closest friends?',
+    'What qualities do you think are most important in a good friend?',
+    'Some people say that it is difficult to make new friends as an adult. Do you agree?',
+    'Do you think online friendships can be as meaningful as friendships in person? Why or why not?'],
+    m: [
+      'I met two of my closest friends in high school, because we were in the same class for three years. The third one I met at university, during a group project. We were all stressed about the deadline, and I think that shared pressure brought us together. Now we meet nearly every week, even though we study different subjects.',
+      'For me, the most important quality is honesty. A good friend tells you the truth, even when it\'s not what you want to hear, but does it kindly. Reliability matters too: you want someone who will help when you really need it, not just when it\'s convenient. And of course, a good sense of humor makes everything easier.',
+      'Yes, I think so, to some extent. At school or university, you meet people automatically, every day. After that, you have to make an effort, for example by joining a club or a sports team. It requires time, and many adults are simply too busy. However, shared activities make it easier, because you already have something in common.',
+      'I think they can be meaningful, but they\'re different. I have a friend I met through an online game, and we speak almost daily, so I know him quite well. However, I think that meeting in person at least occasionally is important, because you notice things that you can\'t see on a screen, like body language and tone.'] },
+  { id: 'ix003', diff: 1, g: 'W', topic: 'Sports and hobbies', ctx: 'You are taking part in a survey about how students spend their free time. A researcher will interview you.', q: [
+    'What do you like to do in your free time, and why do you enjoy it?',
+    'Do you think it is important for people to have a hobby? Why?',
+    'Some people prefer team sports, while others prefer individual activities. Which do you prefer?',
+    'If you could learn a completely new skill or hobby, what would it be, and why?'],
+    m: [
+      'In my free time, I mostly play tennis and read novels. Tennis helps me release the stress after a long day of classes, and I like the challenge of improving my technique. Reading is more of a calm activity: I usually read before going to bed, and it helps me forget about work and fall asleep faster.',
+      'Yes, I think a hobby is really important, because it gives you something that has nothing to do with work or school. When you spend time on an activity that you enjoy, you feel more balanced and less anxious. A hobby can also develop skills, like patience or creativity, which are useful in many other areas of life.',
+      'I prefer individual sports in general, like running or swimming, because I can choose my own schedule and my own pace. However, I played volleyball for three years, and I have to admit that team sports teach you a lot about cooperation and communication. So, ideally, I would combine both: individual training during the week, and a team activity at the weekend.',
+      'I\'d love to learn how to play the piano. I\'ve always found it fascinating to see people play a piece of music from memory. I think it would be a great way to relax, and it requires a lot of discipline, which would be good training for me. Maybe I\'ll start with online lessons and see whether I stay motivated.'] },
+  { id: 'ix004', diff: 2, g: 'M', topic: 'Housing and living arrangements', ctx: 'You have agreed to take part in a study about where students live. An interviewer will ask you some questions.', q: [
+    'Can you describe the place where you live now?',
+    'Do you think it is better for students to live alone, with roommates, or with their family? Why?',
+    'What is the most important factor when choosing a place to live: the price, the location, or the size? Please explain.',
+    'Some cities have very high housing prices. What do you think could be done to help young people find affordable housing?'],
+    m: [
+      'I live in a small apartment, about twenty minutes by bus from the university. It has a bedroom, a tiny kitchen, and a balcony, which I really like, because I can have breakfast there when the weather is nice. It\'s not luxurious, but it\'s quiet and cozy, and it\'s exactly what I need as a student.',
+      'I think it depends on the person. Living with family is the cheapest and most comfortable option, but you may feel less independent. Living alone gives you freedom, but it can be expensive and lonely. Personally, I like having roommates, because you share the cost, you learn to compromise, and there\'s always someone to talk to after a long day.',
+      'For me, the location is the most important. If you live close to the university or to a metro station, you save a lot of time and money on transportation. A cheaper apartment far away often turns out to be less economical when you add the commuting costs. And I\'d rather have a small place in a lively neighborhood than a large one in the middle of nowhere.',
+      'I think governments should build more affordable housing, especially close to universities and city centers. They could also offer rent subsidies for students, or limit how much landlords can increase the rent every year. In addition, universities could build more dormitories, which would reduce the pressure on the private market.'] },
+  { id: 'ix005', diff: 1, g: 'W', topic: 'Volunteering and community', ctx: 'You are participating in a study about community involvement among young people. A researcher will ask you four questions.', q: [
+    'Have you ever done any volunteer work? If so, what did you do?',
+    'Why do you think some people choose to volunteer, even though they are not paid?',
+    'Should schools or universities require students to do community service? Why or why not?',
+    'What could your city or neighborhood do to bring people together more?'],
+    m: [
+      'Yes, I volunteered for two years at a food bank near my high school. Every Saturday morning, I helped to sort donated products and prepare packages for families. At first, it was just a school requirement, but I enjoyed it so much that I continued even after I had completed the required hours.',
+      'I think people volunteer because it gives them a sense of purpose. You see the direct result of your actions, which is not always the case in a regular job. It\'s also a way to meet people who share your values, and to learn new skills, such as organizing events or working with different age groups.',
+      'I\'m in favor of it, but with some conditions. If students are forced, they may feel resentful and do the minimum. But if they can choose the type of activity, for example working with animals, children, or the elderly, they are more likely to find something they care about. A few hours per semester seems like a reasonable requirement.',
+      'I think the city could organize more neighborhood events, like street markets or outdoor movie nights, which are free and open to everyone. It would also help to create more shared spaces, like community gardens, where neighbors who would never meet otherwise can work together. Sometimes people just need a good reason to leave their apartment and talk to each other.'] },
+  { id: 'ix006', diff: 2, g: 'M', topic: 'Music and the arts', ctx: 'You are taking part in a university project about culture and creativity. An interviewer will ask you some questions.', q: [
+    'What kind of music do you usually listen to, and when do you listen to it?',
+    'Do you think that art and music should be a mandatory part of school education? Why or why not?',
+    'Some people say that museums and concerts are too expensive for young people. How do you feel about this?',
+    'Can art change the way people think about society? Please explain your opinion.'],
+    m: [
+      'I listen to a bit of everything, but mostly indie rock and electronic music. I usually put on music when I\'m studying, as long as there are no lyrics, because otherwise I get distracted. I also listen to energetic songs when I go running, since the rhythm helps me keep a steady pace.',
+      'Yes, I think they should be. Many students are not good at math or science, but they might be talented at drawing or playing an instrument, and school could be the only place where they discover it. In addition, creative activities improve concentration and reduce stress, so they actually help students to perform better in other subjects.',
+      'To some extent, yes. A concert ticket for a famous artist can cost more than a hundred euros, which is a lot for a student. But I think that many cities offer discounts, and there are also free events, like street concerts or museum nights. If young people know about them, culture is more accessible than it seems.',
+      'Absolutely. Throughout history, books, paintings, and songs have drawn attention to injustice, often more effectively than political speeches. For example, a documentary can make you feel real empathy for people living in a very different situation. Art touches emotions, and emotions often influence our opinions more strongly than statistics do.'] },
+  { id: 'ix007', diff: 2, g: 'W', topic: 'Time management', ctx: 'You have agreed to participate in a study about how students organize their time. A researcher will interview you.', q: [
+    'How do you usually organize your week?',
+    'What do you do when you have too many things to do and not enough time?',
+    'Do you think it is a good idea to work until the last moment before a deadline? Why or why not?',
+    'What advice would you give to a new student who struggles to manage their time?'],
+    m: [
+      'I use a paper planner, where I write down all my classes, my deadlines, and my appointments on Sunday evening. Then I divide each day into blocks: morning for the most difficult tasks, afternoon for classes, and evening for lighter things. Having a visual plan helps me feel less overwhelmed, and I always keep one evening free for friends.',
+      'First, I make a list of everything I need to do, and then I rank the tasks by urgency and importance. I do the urgent and important ones first, and I postpone or even cancel the less important ones. It\'s also essential for me to say no sometimes, even if it\'s uncomfortable, because I can\'t do everything.',
+      'Honestly, I think it\'s risky. Some people say they work better under pressure, and I understand that, but unexpected things always happen, such as being sick or having technical problems. If you finish a few days early, you also have time to review your work and correct small mistakes, which usually improves the final result.',
+      'I\'d tell them to start with small, realistic goals instead of trying to change everything at once. For example, set a specific study time each day and put the phone in another room. They should also be kind to themselves, because everyone has unproductive days. What matters is building a routine that you can maintain in the long term.'] },
+  { id: 'ix008', diff: 3, g: 'M', topic: 'Language learning', ctx: 'You are participating in a research project about language learning. An interviewer will ask you four questions.', q: [
+    'Which foreign languages have you studied, and how did you learn them?',
+    'What do you find most difficult about learning a new language?',
+    'Some people believe that children learn languages more easily than adults. Do you agree?',
+    'Do you think English will remain the main international language in the future? Why or why not?'],
+    m: [
+      'I\'ve studied English since primary school and Spanish for four years in high school. English was mainly taught at school, but I really improved by watching series and playing video games in English. For Spanish, I spent a month with a host family in Madrid, which helped me more than the previous three years in class.',
+      'For me, the hardest part is speaking spontaneously. I can read and write quite well, but in a real conversation I have to think about grammar and vocabulary at the same time, and I often freeze. I think the only solution is practice, and accepting that I\'ll make mistakes in front of other people.',
+      'I partly agree. Children have an advantage with pronunciation, because their brains are more flexible with new sounds. On the other hand, adults have better learning strategies and can understand grammar rules, so they often progress faster in the beginning. What really matters is the amount of exposure and regular practice, whatever your age.',
+      'I think it will remain dominant for at least a few decades, because it\'s deeply established in science, business, and technology. However, I wouldn\'t be surprised if languages like Chinese or Spanish become more important, depending on the economic situation. And with translation technology improving, speaking English might become less essential for simple everyday communication.'] },
+  { id: 'ix009', diff: 2, g: 'W', topic: 'Family and traditions', ctx: 'You have volunteered for a study about family life and cultural traditions. A researcher will ask you some questions.', q: [
+    'Is there a family tradition that is important to you? Please describe it.',
+    'How has your relationship with your family changed since you started university?',
+    'Do you think traditions are still important in modern society? Why or why not?',
+    'Some people say that grandparents play an important role in raising children. What is your opinion?'],
+    m: [
+      'Every year on the first Sunday of December, my whole family meets at my grandmother\'s house to bake Christmas cookies. My cousins and I decorate them, and my grandmother tells the same stories about her childhood. It\'s noisy and messy, but it\'s my favorite day of the year, and I hope we will keep doing it for a long time.',
+      'It has become more balanced, I think. When I lived at home, we mainly talked about practical things, like school or chores. Now that I live far away, we speak less often, but our conversations are deeper, and I appreciate my parents much more. They also treat me more like an adult, which I value.',
+      'Yes, I believe they are, even though they may change in form. Traditions give people a feeling of belonging and continuity, which is especially valuable in a world that changes so fast. They also create memories that bring families together. But I think each generation should be free to adapt them rather than follow them blindly.',
+      'I think grandparents can play a very positive role. They have time, patience, and experience, which busy parents often lack. I learned many things from my grandfather, such as gardening and how to play chess. Of course, parents should remain the main decision makers, but a close relationship with grandparents enriches a child\'s life.'] },
+  { id: 'ix010', diff: 3, g: 'M', topic: 'Science and curiosity', ctx: 'You are taking part in a university study on attitudes toward science. An interviewer will ask you some questions.', q: [
+    'Was there a scientific topic or discovery that fascinated you when you were younger?',
+    'Do you think governments should invest more money in space exploration? Why or why not?',
+    'Some people say that scientists should always explain their work in simple language. Do you agree?',
+    'How can schools make science more interesting for students?'],
+    m: [
+      'When I was about ten, I was fascinated by dinosaurs and especially by the idea that a giant asteroid might have caused their extinction. I borrowed every book I could find at the library, and I even dreamed of becoming a paleontologist. Although I chose a different path, I still love reading about discoveries like this.',
+      'I think a moderate investment is justified. Space research has produced useful technologies, such as satellites for weather forecasting and GPS, which we use every day. However, I understand that some people prefer to spend the money on urgent issues like healthcare or climate change. So the key is a balance, and maybe international cooperation to share the costs.',
+      'Yes, I do, at least when they communicate with the general public. If people don\'t understand scientific results, they may lose trust or believe false information. Of course, scientists need precise technical vocabulary in their research papers, but they can also learn to explain their ideas through analogies and examples.',
+      'I think the best way is to make it practical. Students remember much more when they do experiments themselves, instead of simply reading a textbook. Visiting laboratories or inviting real scientists to talk about their careers would also be motivating. And teachers could connect science to everyday questions, like why the sky is blue or how a phone works.'] },
+  { id: 'ix011', diff: 2, g: 'W', topic: 'Reading and libraries', ctx: 'You are participating in a study about reading habits. A researcher will interview you.', q: [
+    'How often do you read for pleasure, and what do you like to read?',
+    'Do you prefer reading paper books or reading on a screen? Why?',
+    'Some people say that fewer young people read books today than in the past. Why do you think that is?',
+    'Do you think public libraries are still necessary in the digital age?'],
+    m: [
+      'I try to read for at least thirty minutes every evening. I mostly read novels, especially historical fiction, but I also enjoy biographies of entrepreneurs. Reading is the best way for me to disconnect from my phone, and I feel calmer and sleep better when I\'ve read a few pages before bed.',
+      'I prefer paper books, mainly because it\'s more comfortable for my eyes, and I find it easier to concentrate. There are no notifications, and I can see how much I have read. However, I do use an e-reader when I travel, because it\'s lighter and I can carry dozens of books without any effort.',
+      'I think it\'s mainly because of competition from other forms of entertainment. Series, games, and social media are designed to capture attention instantly, whereas a book requires effort. Also, many students read so much for school that they don\'t feel like reading for pleasure. Teachers could help by letting students choose their own books.',
+      'Yes, definitely. Libraries offer much more than books: they provide quiet places to work, free internet access, and activities for children and elderly people. For people who can\'t afford a computer or a subscription, they are a vital resource. I think they have actually become more of a community center than a simple storage place.'] },
+  { id: 'ix012', diff: 3, g: 'M', topic: 'Part-time jobs and internships', ctx: 'You have agreed to participate in a study about student employment. A researcher will ask you four questions.', q: [
+    'Have you ever had a part-time job or an internship? What did you do?',
+    'What is the most valuable thing you have learned from working?',
+    'Do you think students should do an internship before they graduate? Why or why not?',
+    'Some people think that being a good employee is mostly about attitude, not skills. What do you think?'],
+    m: [
+      'Yes, last summer I did a two-month internship in the accounting department of a small manufacturing company. I helped to prepare invoices, check expense reports, and update spreadsheets. It wasn\'t very glamorous, but I saw how a real company works, and my supervisor gave me more responsibility every week.',
+      'I think the most valuable lesson was learning to communicate clearly. At university, you usually work alone, and nobody checks whether you ask for help. At work, if you don\'t understand a task and say nothing, the entire team can be delayed. I learned to ask precise questions and to give regular updates.',
+      'I strongly recommend it. An internship allows you to test whether a career really suits you before you commit to it. It also helps you build a network, and employers generally prefer candidates who already have some professional experience. Even if the internship is disappointing, you learn what you don\'t want to do, which is also valuable.',
+      'I think attitude matters a lot, but skills can\'t be completely ignored. Someone who is motivated, punctual, and eager to learn can acquire most technical skills quickly. On the other hand, a very talented person with a poor attitude can damage team morale. If I had to choose between the two, I would probably hire the person with the better attitude.'] },
+  { id: 'ix013', diff: 1, g: 'W', topic: 'Entertainment and leisure', ctx: 'You are taking part in a survey about entertainment habits among university students. A researcher will interview you.', q: [
+    'What kind of entertainment do you enjoy most: movies, series, games, or something else?',
+    'How much time do you think is reasonable to spend on entertainment each day?',
+    'Some people say that video games are a waste of time. Do you agree?',
+    'How has streaming changed the way people watch television?'],
+    m: [
+      'I enjoy series the most, particularly crime dramas and documentaries. I like stories that develop over several episodes, because you get to know the characters really well. I often watch with my roommate, and we discuss the plot afterward, which makes it more fun than watching alone.',
+      'I think around one or two hours a day is reasonable for a student. Everyone needs time to relax, and entertainment is a good way to recover from mental effort. The problem starts when it replaces sleep or homework. A useful rule for me is to finish my work first and consider entertainment as a reward.',
+      'I don\'t agree entirely. Some games develop useful skills, like strategic thinking, teamwork, and quick decision-making, and they can be a very social activity. However, like everything else, they can become a problem if someone plays for many hours and neglects their studies or health. So moderation is the key.',
+      'Streaming has given viewers much more control. We can watch what we want, when we want, and even binge an entire season in a weekend. The downside is that people no longer share the same program at the same time, so there are fewer common conversations at school or at work, and we sometimes spend more time choosing than watching.'] },
+  { id: 'ix014', diff: 3, g: 'M', topic: 'Learning from mistakes', ctx: 'You are participating in a research project on personal growth and learning. An interviewer will ask you some questions.', q: [
+    'Can you describe a mistake you made that taught you something important?',
+    'Why do you think many people are afraid of failure?',
+    'Should schools give students more opportunities to learn from their mistakes, instead of just giving grades? Why?',
+    'Do you think that successful people have usually failed many times before succeeding?'],
+    m: [
+      'Last year, I agreed to organize a student event, but I underestimated how much work it would take. A week before the date, we had not booked the room or confirmed the speakers. I panicked and asked for help, and we finally managed, but I learned to plan earlier and to break a big project into smaller tasks.',
+      'I think it\'s largely because of social pressure. People are afraid that others will judge them or think they are not competent. In many schools and companies, mistakes are punished instead of being treated as part of the learning process. As a result, people prefer to avoid risks, and they miss many opportunities to grow.',
+      'Yes, I think it would be very beneficial. If a student receives a bad grade and moves on to the next topic, the misunderstanding remains. If, instead, they can correct the exam and resubmit it, they actually learn the material. Some teachers already do this, and I think it motivates students to improve rather than to give up.',
+      'I think that\'s often true, although it isn\'t visible from the outside. We usually see the final success and not the rejected projects or failed attempts. Many famous entrepreneurs started several companies that did not work. What distinguishes them is probably not the absence of failure, but the ability to analyze what went wrong and to try again.'] },
+  { id: 'ix015', diff: 2, g: 'W', topic: 'Community and neighbors', ctx: 'You have agreed to take part in a survey about life in residential neighborhoods. A researcher will ask you four questions.', q: [
+    'Do you know many of your neighbors? Please tell me about them.',
+    'What makes a neighborhood a pleasant place to live?',
+    'Some people prefer a quiet neighborhood, while others prefer one that is lively and busy. Which do you prefer?',
+    'How can neighbors solve problems, such as noise, without creating a conflict?'],
+    m: [
+      'I know a few of them. The woman next door is a retired teacher who often gives me advice about the area, and the family downstairs has two children who sometimes play music during the afternoon. We just say hello on the stairs, but I know that I could knock on their door if I needed help.',
+      'For me, a pleasant neighborhood has a good balance of services and calm. You should be able to walk to a bakery, a supermarket, and a park. It should also feel safe in the evening. And I think the people matter just as much as the buildings, because friendly neighbors make you feel at home.',
+      'I prefer a lively neighborhood, as long as it isn\'t too noisy at night. I like being able to go out for a coffee or to see people on the street. A very quiet area can feel isolated, especially when you are young. But when I want peace, I can go to a park or stay at home.',
+      'The best approach is to talk directly and politely, before the problem gets bigger. Instead of leaving an angry note, you can knock on the door and explain how the noise affects you, and then listen to their side. Most people don\'t realize they are disturbing others, and they are usually happy to find a compromise.'] },
+  { id: 'ix016', diff: 3, g: 'M', topic: 'Weather, seasons and daily mood', ctx: 'You are participating in a study on how environment affects well-being. An interviewer will ask you some questions.', q: [
+    'What is your favorite season, and what do you like to do during that time?',
+    'Does the weather affect your mood or your productivity? Please explain.',
+    'Some people prefer to live in a warm climate, while others prefer a cooler one. Which would you choose?',
+    'How do you think climate change might affect the way people live in your region in the next fifty years?'],
+    m: [
+      'My favorite season is autumn. The temperature is mild, the colors of the trees are beautiful, and it\'s a good period for studying because I don\'t feel guilty about staying inside. I also like to go hiking on weekends, when the forest is quiet and the air is fresh.',
+      'Yes, definitely. On sunny days, I feel more energetic and I\'m more motivated to go out, meet friends, and exercise. When it\'s gray and rainy for a week, I find it harder to concentrate, and I tend to sleep more. To compensate, I try to take a short walk outside every day, even in bad weather.',
+      'I\'d choose a moderate climate, with four seasons but without extreme temperatures. Very hot weather makes me tired and uncomfortable, and I find long, dark winters depressing. A place like northern Spain or the west coast of France would be ideal, because you can enjoy the outdoors for most of the year.',
+      'I think we will see hotter summers, more frequent heat waves, and perhaps more severe storms. People may need to adapt their homes, for example with better insulation and shaded areas, and cities will have to plant more trees. Agriculture will probably change as well, and some regions might have to find new sources of water.'] }
+);
