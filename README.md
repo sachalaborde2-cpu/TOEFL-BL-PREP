@@ -17,12 +17,12 @@ Tu peux aussi la lancer à la main : `python3 server.py`, puis ouvre http://loca
 | Mon plan | 5 phases jusqu'au jour J, calendrier des tests blancs, priorités recalculées chaque jour |
 | Entraînement | Les 12 types de tâches 2026, avec une fiche méthode par tâche |
 | Tests blancs | Diagnostic, 3 tests blancs fixes + tests aléatoires, Reading/Listening adaptatifs |
-| Vocabulaire | ~200 mots académiques, finance et idiomes, en répétition espacée + mode orthographe |
+| Vocabulaire | 205 mots académiques, finance et idiomes, en répétition espacée + mode orthographe |
 | Carnet d'erreurs | Chaque erreur revient jusqu'à 2 réussites consécutives |
 | Suivi | Courbes de progression, activité, historique des productions corrigées |
 | Guide | Analyse du test, correspondances score/CECRL, stratégies, checklist du jour J |
 
-Banque d'exercices : 120 paragraphes Complete the Words, 60 documents du quotidien, 30 textes académiques, 246 répliques, 58 conversations, 28 annonces, 32 mini-cours, 210 phrases à reconstruire, 30 e-mails, 30 discussions, 24 séries Listen & Repeat et 28 entretiens, avec réponses modèles de niveau C1.
+Banque d'exercices (tous niveaux B2, C1 ou C2) : 240 paragraphes Complete the Words, 120 documents du quotidien, 30 textes académiques, 492 répliques, 58 conversations, 28 annonces, 32 mini-cours, 210 phrases à reconstruire, 30 e-mails, 30 discussions, 24 séries Listen & Repeat et 28 entretiens, avec réponses modèles de niveau C1. Toutes les séquences ont été relues une à une (réponses, langue, faits, niveau).
 
 ## Tirage des exercices : aléatoire, sans répétition, adapté à ton niveau
 
@@ -52,3 +52,8 @@ La progression est sauvegardée automatiquement dans `data/progression.json`, av
 **Changer d'ordinateur :** le code se récupère avec `git pull`, mais la progression ne passe pas par GitHub. Dans Réglages, clique sur **⬇ Exporter (JSON)** à la fin de chaque séance, copie le fichier sur ton Google Drive, puis **⬆ Importer** sur l'autre machine. Importe toujours le fichier le plus récent avant de travailler : l'import remplace toute la progression locale.
 
 Navigateur conseillé : **Google Chrome** (voix de synthèse et reconnaissance vocale pour le Speaking). Pour des voix plus naturelles sur Mac : Réglages Système → Accessibilité → Contenu énoncé → Voix du système → télécharger les voix anglaises « Améliorée ».
+
+## État du chantier
+
+- Fait : niveau adaptatif (minimum B2), relecture complète de toutes les banques, doublement des paragraphes à trous, des documents du quotidien et des répliques.
+- À faire : doubler les conversations, mini-cours, textes académiques, annonces, phrases à reconstruire, e-mails, discussions et exercices d'oral, avec une majorité de C1 et C2 pour remplir les tranches de niveau élevées. Les textes académiques et annonces sont déjà écrits mais pas encore relus ni branchés.
