@@ -31,7 +31,9 @@ Dernier en premier. Pour chaque étape : ce qui a été fait, pourquoi, comment 
 - `tools/stress-play.js` : lectures enchaînées 10/10 ; relances en pleine phrase 6/6 (5/6 avant).
 - Scénarios de panne (`tools/audio-failure-tests.js`) : `blocked`, `allfail`, `onefail` et `ok` se comportent comme prévu.
 - Découpage de toutes les répliques : 2 328 morceaux, aucun vide, aucun > 420 caractères (max 354).
-- Balayage réel d'un échantillon de tous les types : voir ci-dessous (si absent, il n'a pas pu être terminé).
+- **Fiabilité en usage réel** (`tools/stress-play.js`, vrai `Voice.play`) : 40 répliques lues à la suite = 40/40 complètes ; 6 relances en pleine phrase = 6/6 ; **1 seule nouvelle tentative nécessaire sur 46 lectures** (et elle a réussi grâce au changement de voix).
+- `tools/sweep-audio.js` (échantillon de 291 morceaux de tous les types, voix Aria/Guy fixes) : 23 % d'échecs au 1er essai, 6 % d'échecs permanents, sans aucun point commun entre les textes (phrases ordinaires, tous types mélangés). Ce protocole est **artificiel** (il démarre puis annule chaque lecture en boucle, sans changer de voix) : il sert à repérer un texte que le moteur refuserait systématiquement, pas à mesurer la fiabilité réelle. Conclusion : aucun texte du Listening n'est en cause ; les échecs relèvent du service vocal en ligne, d'où la nouvelle tentative avec une autre voix dans `Voice.play` (`result.retried` compte ces cas).
+- Aucune erreur JavaScript sur 23 pages et routes testées (`tools/console-errors.js`).
 
 **Limites honnêtes** : on ne peut pas *entendre* l'audio depuis ici ; les mesures reposent sur les événements du moteur (start/end/error) dans Edge sans carte son. Le test à faire par l'utilisateur : lancer quelques conversations et dire si les blancs lui paraissent encore trop longs (réglage de vitesse : Réglages > Vitesse des voix, 0,8 à 1,25).
 

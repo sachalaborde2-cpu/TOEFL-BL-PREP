@@ -385,7 +385,7 @@ const Voice = {
        blocked     = le navigateur refuse de parler sans clic préalable (il faut un bouton ▶) ;
        failed      = nombre de morceaux que la voix n'a pas pu lire (réseau coupé, voix en panne). */
   async play(segments, { rate = null, voices = null, onStart, onEnd } = {}) {
-    const res = { ok: true, blocked: false, interrupted: false, played: 0, failed: 0, total: 0 };
+    const res = { ok: true, blocked: false, interrupted: false, played: 0, failed: 0, retried: 0, total: 0 };
     if (!('speechSynthesis' in window)) { toast('Synthèse vocale indisponible dans ce navigateur'); res.ok = false; res.failed = 1; res.total = 1; return res; }
     await this.ready();
     const cast = voices || {}; let prevV = null; // voix manquantes (liste pas encore chargée au rendu) : choisies maintenant, et conservées pour la réécoute
@@ -422,7 +422,7 @@ const Voice = {
       let dog = setTimeout(() => { if (!o.began) o.fail(); }, 8000); // aucun son 8 s après son tour : la voix ne répond pas
       let st = await o.p; clearTimeout(dog);
       if (st === 'fail' && alive()) { // une seule nouvelle tentative, avec une autre voix (la voix défaillante est écartée)
-        const bad = cast[queue[i].g]; if (bad) this._bad.add(bad.name);
+        res.retried++; const bad = cast[queue[i].g]; if (bad) this._bad.add(bad.name);
         const alt = this.pick(queue[i].g, null, bad); if (alt) cast[queue[i].g] = alt;
         try { this._lastCancel = Date.now(); speechSynthesis.cancel(); } catch (e) { /* rien */ }
         await this._settle(); if (!alive()) { res.interrupted = true; return res; }

@@ -20,12 +20,12 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   const out = await ev(`(async () => {
     const items = CONTENT.lcr.slice(0, ${N + 12});
     const seg = (it) => [{ t: it.p, g: it.g || 'W' }];
-    const res = { chained: { ok: 0, partial: 0, silent: 0, blocked: 0 }, interrupted: { ok: 0, partial: 0, silent: 0, blocked: 0, interruptedFirst: 0 }, details: [] };
+    const res = { retried: 0, chained: { ok: 0, partial: 0, silent: 0, blocked: 0 }, interrupted: { ok: 0, partial: 0, silent: 0, blocked: 0, interruptedFirst: 0 }, details: [] };
     const bucket = (b, r) => { if (r.blocked) b.blocked++; else if (r.total && r.played === r.total) b.ok++; else if (r.played) b.partial++; else if (!r.interrupted) b.silent++; };
-    for (let i = 0; i < ${N}; i++) { const r = await Voice.play(seg(items[i])); bucket(res.chained, r); if (!(r.played === r.total)) res.details.push('chained ' + items[i].id + ' ' + JSON.stringify(r)); }
+    for (let i = 0; i < ${N}; i++) { const r = await Voice.play(seg(items[i])); res.retried += r.retried || 0; bucket(res.chained, r); if (!(r.played === r.total)) res.details.push('chained ' + items[i].id + ' ' + JSON.stringify(r)); }
     for (let i = ${N}; i < ${N} + 6; i++) {
       const first = Voice.play(seg(items[i - 6])); await new Promise((r) => setTimeout(r, 1500));
-      const second = Voice.play(seg(items[i])); const r1 = await first; const r2 = await second;
+      const second = Voice.play(seg(items[i])); const r1 = await first; const r2 = await second; res.retried += (r1.retried || 0) + (r2.retried || 0);
       if (r1.interrupted) res.interrupted.interruptedFirst++; bucket(res.interrupted, r2); if (!(r2.played === r2.total)) res.details.push('interrupted ' + items[i].id + ' ' + JSON.stringify(r2));
     }
     return JSON.stringify(res);

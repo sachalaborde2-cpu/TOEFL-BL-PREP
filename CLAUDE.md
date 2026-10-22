@@ -61,7 +61,7 @@ node tools/check-content.js      # doit finir par ALL OK
 node tools/level-stats.js        # B2/C1/C2 par type
 for f in app/js/*.js app/data/*.js; do node --check $f; done
 ```
-Pour l'audio : `tools/audit-audio-data.js`, `audit-audio-chunks.js`, `stress-play.js`, `sweep-audio.js` (voir `tools/README.md`).
+Pour l'audio : `tools/stress-play.js` (fiabilité réelle, à privilégier), `audit-audio-data.js`, `audit-audio-chunks.js`, `console-errors.js` ; `sweep-audio.js` est un test artificiel (démarre puis annule en boucle) : ses échecs ne reflètent pas l'usage réel (voir `tools/README.md` et le journal).
 
 ## État actuel (mis à jour le 2026-10-23)
 - Banques (tous niveaux B2/C1/C2) : ctw 240, dl 120, ap 60, lcr 492, conv 116, ann 56, talk 63, bas 420, email 60, disc 60, rep 48, int 56. Vocabulaire : 205 mots + « Mes mots ».
@@ -69,7 +69,7 @@ Pour l'audio : `tools/audit-audio-data.js`, `audit-audio-chunks.js`, `stress-pla
 - Dernier push sur GitHub : voir `git log -1` (le journal indique ce qui est poussé ou non).
 
 ## À faire / pistes (par priorité)
-1. **Audio** : finir la validation du moteur audio (balayage d'échantillon, voir journal) ; si les blancs restent trop longs, étudier une voix locale ou un petit service TTS côté serveur (`edge-tts`, dépendance optionnelle).
+1. **Audio** : moteur réécrit et validé par mesure (voir journal). Reste à faire par l'utilisateur : écouter quelques conversations et dire si les blancs (~0,2-0,4 s à chaque changement de voix, latence du service en ligne) lui paraissent encore trop longs. Si oui : voix locale, ou petit service TTS côté serveur (`edge-tts`, dépendance optionnelle).
 2. Relecture croisée des nouvelles séquences (surtout distracteurs des `lcr` B2, parfois simples) ; plus de C2 pour `bas` et `ap`.
 3. Affichage de la correction des Complete the Words : montre le mot entier à côté du trou rouge (« thou_____ thousands »), peu lisible ; proposer de n'afficher que les lettres manquantes (demandé en question par l'utilisateur, pas encore décidé).
 4. 25 mots du vocabulaire d'origine ont été remplacés par un agent (analyze, benefit…) : la progression sur ces anciennes fiches n'apparaît plus ; à remettre si l'utilisateur le demande.
