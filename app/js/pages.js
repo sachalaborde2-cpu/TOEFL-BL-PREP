@@ -276,7 +276,7 @@ function pageTrain(view) {
       const st = Estimator.typeStats(t); const total = Content.cycleTotal(t);
       const opts = { ctw: [1, 3, 5], dl: [2, 4, 6], ap: [1, 2, 3], lcr: [8, 16, 24], conv: [2, 4, 6], ann: [2, 3, 4], talk: [1, 2, 3], bas: [5, 10, 15], email: [1], disc: [1], rep: [1, 2], int: [1] }[t];
       return `<div class="card task-card"><div class="row between"><b>${TYPES[t].name}</b>${st.band != null ? `<span class="pill ${s}">${fmtBand(st.band)}</span>` : ''}</div>
-        <div class="meta">${TYPES[t].fr} · ${st.count} fait(s) · ${Content.unseenCount(t)}/${total} restants dans le cycle${Content.cycleNo(t) > 1 ? ' n°' + Content.cycleNo(t) : ''}${st.acc != null ? ' · réussite ' + pct(st.acc) : ''}</div>
+        <div class="meta">${TYPES[t].fr} · ${st.count} fait(s) · ${Content.unseenCount(t)}/${total} restants dans le cycle (niveau ${Estimator.levelLabel(t)}+)${Content.cycleNo(t) > 1 ? ' n°' + Content.cycleNo(t) : ''}${st.acc != null ? ' · réussite ' + pct(st.acc) : ''}</div>
         <div class="row"><a class="btn sm" href="#/strategy/${t}">Méthode</a>${opts.map((n) => `<a class="btn sm primary" href="#/practice/${t}?n=${n}">${n} ${n > 1 ? '' : ''}${TYPES[t].unit.split(' ')[0]}${n > 1 && !TYPES[t].unit.includes('(') ? 's' : ''}</a>`).join('')}</div></div>`;
     }).join('')}</div>`).join('')}`;
 }

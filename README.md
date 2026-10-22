@@ -24,11 +24,16 @@ Tu peux aussi la lancer à la main : `python3 server.py`, puis ouvre http://loca
 
 Banque d'exercices : 120 paragraphes Complete the Words, 60 documents du quotidien, 30 textes académiques, 246 répliques, 58 conversations, 28 annonces, 32 mini-cours, 210 phrases à reconstruire, 30 e-mails, 30 discussions, 24 séries Listen & Repeat et 28 entretiens, avec réponses modèles de niveau C1.
 
-## Tirage des exercices : aléatoire, sans répétition
+## Tirage des exercices : aléatoire, sans répétition, adapté à ton niveau
 
-Pour chaque tâche, les séquences sont tirées **complètement au hasard** parmi celles que tu n'as pas encore faites. Aucune ne revient avant que tu aies fait **toutes** les autres : quand le stock est épuisé, un message l'annonce et le cycle repart de zéro. La page Entraînement affiche ce qu'il reste dans le cycle en cours. Les tests blancs adaptatifs gardent leur sélection par difficulté (B1 / B2 / C1) pour le module 2.
+Les séquences sont notées par niveau CECRL : **B2, C1 ou C2**. Il n'y a plus de B1 : B2 est le minimum.
 
-Le suivi des cycles est enregistré dans la progression (`bags` et `cycles`). Une ancienne sauvegarde reste compatible : le cycle en cours est reconstruit à partir de ce que tu as déjà fait.
+- **Ton niveau suit ta réussite, tâche par tâche.** Tu pars de ton auto-évaluation (Réglages). Au niveau B2, tu reçois des séquences B2, C1 et C2. Dès que ta réussite récente atteint la bande 5.0 (C1), tu ne reçois plus que du C1 et du C2. Si ta moyenne retombe sous 4.5, tu redescends au mélange B2/C1/C2. L'écart entre 4.5 et 5.0 évite de zigzaguer.
+- **Un exercice B2 réussi à 100 % compte pour 93 %** dans l'estimation : seul le C1 prouve un niveau C1.
+- **Tirage complètement aléatoire dans ta tranche de niveau**, et aucune séquence ne revient avant que tu aies fait **toutes** les autres de cette tranche. Un message annonce la fin du cycle, puis il repart de zéro. La page Entraînement affiche ce qu'il reste dans le cycle et ton niveau actuel.
+- Les tests blancs gardent leur module 2 adaptatif : C1/C2 si tu réussis le module 1, B2/C1 sinon.
+
+Le suivi est enregistré dans la progression (`bags`, `cycles`, `lv`). Une ancienne sauvegarde reste compatible : le cycle est reconstruit à partir de ce que tu as déjà fait. Les anciennes séquences encore étiquetées B1 sont traitées comme B2 en attendant leur réécriture.
 
 ## Interface
 

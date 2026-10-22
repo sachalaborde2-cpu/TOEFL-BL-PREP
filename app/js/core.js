@@ -94,6 +94,7 @@ function defaultState() {
     seen: {},       // "type:id" -> ts
     bags: null,     // type -> ids faits dans le cycle en cours (null = à reconstruire depuis `seen`)
     cycles: {},     // type -> nombre de cycles complets terminés
+    lv: {},         // type -> niveau courant des séquences : 2 = B2 (pool B2/C1/C2), 3 = C1 (pool C1/C2)
     mocks: [],      // rapports de tests blancs
     errors: [],     // carnet d'erreurs
     vocab: {},      // mot -> {box,due,right,wrong}
@@ -158,6 +159,19 @@ const Content = {
     }
     return set;
   },
+  /* Niveau CECRL d'une séquence : 2 = B2, 3 = C1, 4 = C2. Le minimum est B2 : un ancien « 1 » (B1) compte comme B2. */
+  level(x) { return clamp(x.diff || 2, 2, 4); },
+  /* Séquences proposables pour ce type : hors tests blancs réservés, et dans la tranche de niveau de l'élève
+     (niveau B2 -> B2/C1/C2 ; niveau C1 -> C1/C2). `diffs` impose une tranche (tests blancs adaptatifs). */
+  eligible(type, { diffs = null, allowReserved = false, exclude = null } = {}) {
+    const reserved = allowReserved ? new Set() : this.reservedIds();
+    const levels = diffs || Estimator.levels(type);
+    const all = this.all(type).filter((x) => !(exclude && exclude.has(type + ':' + x.id)));
+    const base = all.filter((x) => !reserved.has(type + ':' + x.id));
+    const pool = base.length ? base : all;
+    const lv = pool.filter((x) => levels.includes(this.level(x)));
+    return lv.length ? lv : pool;
+  },
   /* « Sac » du cycle en cours pour un type : ids déjà faits depuis le dernier tour complet.
      Première utilisation sur une ancienne sauvegarde : on le reconstruit à partir de `seen`. */
   bag(type) {
@@ -168,37 +182,33 @@ const Content = {
     }
     return (s.bags[type] = s.bags[type] || []);
   },
-  /* Choisit n items au hasard parmi ceux pas encore faits dans le cycle en cours.
-     Quand tout a été fait (voir markDone), le cycle repart de zéro. `diffs` (tests blancs adaptatifs) filtre par difficulté. */
+  /* Choisit n séquences au hasard parmi celles de ton niveau pas encore faites dans le cycle en cours.
+     Quand toutes celles de ton niveau ont été faites (voir markDone), le cycle repart de zéro. */
   pick(type, n, { exclude = new Set(), diffs = null, allowReserved = false } = {}) {
-    const reserved = allowReserved ? new Set() : this.reservedIds();
-    const base = (x) => !exclude.has(type + ':' + x.id);
-    let pool = this.all(type).filter((x) => base(x) && !reserved.has(type + ':' + x.id));
-    if (diffs) { const d = pool.filter((x) => diffs.includes(x.diff || 2)); if (d.length >= n) pool = d; }
-    if (!pool.length) pool = this.all(type).filter(base);
+    const pool = this.eligible(type, { diffs, allowReserved, exclude });
     const done = new Set(this.bag(type));
-    const fresh = shuffle(pool.filter((x) => !done.has(x.id)));
-    const out = fresh.slice(0, n);
-    if (out.length < n) { // il reste moins de n inédits dans le cycle : on complète au hasard
+    const out = shuffle(pool.filter((x) => !done.has(x.id))).slice(0, n);
+    if (out.length < n) { // il reste moins de n séquences inédites dans le cycle : on complète au hasard
       const taken = new Set(out.map((x) => x.id));
       out.push(...shuffle(pool.filter((x) => !taken.has(x.id))).slice(0, n - out.length));
     }
     return out;
   },
-  /* Appelé quand un item est terminé : l'ajoute au cycle, et relance le cycle quand tout a été fait */
+  /* Appelé quand une séquence est terminée : l'ajoute au cycle, et relance le cycle quand tout ton niveau a été fait */
   markDone(type, id) {
     const s = Store.s; const bag = this.bag(type);
     if (!bag.includes(id)) bag.push(id);
-    const reserved = this.reservedIds(); const done = new Set(bag);
-    const pool = this.all(type).filter((x) => !reserved.has(type + ':' + x.id));
+    const pool = this.eligible(type); const done = new Set(bag);
     if (pool.length && pool.every((x) => done.has(x.id))) {
-      s.bags[type] = []; s.cycles = s.cycles || {}; s.cycles[type] = (s.cycles[type] || 0) + 1;
-      toast(`Cycle terminé : tu as fait les ${pool.length} exercices de « ${TYPES[type] ? TYPES[type].name : type} ». On repart de zéro !`, 4200);
+      const ids = new Set(pool.map((x) => x.id));
+      s.bags[type] = bag.filter((i) => !ids.has(i)); // on ne repart de zéro que pour la tranche de niveau terminée
+      s.cycles = s.cycles || {}; s.cycles[type] = (s.cycles[type] || 0) + 1;
+      toast(`Cycle terminé : tu as fait les ${pool.length} exercices de « ${TYPES[type] ? TYPES[type].name : type} » à ton niveau. On repart de zéro !`, 4200);
     }
   },
-  /* Exercices restants dans le cycle en cours */
-  unseenCount(type) { const done = new Set(this.bag(type)); const reserved = this.reservedIds(); return this.all(type).filter((x) => !done.has(x.id) && !reserved.has(type + ':' + x.id)).length; },
-  cycleTotal(type) { const reserved = this.reservedIds(); return this.all(type).filter((x) => !reserved.has(type + ':' + x.id)).length; },
+  /* Séquences restantes dans le cycle en cours (à ton niveau) */
+  unseenCount(type) { const done = new Set(this.bag(type)); return this.eligible(type).filter((x) => !done.has(x.id)).length; },
+  cycleTotal(type) { return this.eligible(type).length; },
   cycleNo(type) { return ((Store.s.cycles || {})[type] || 0) + 1; },
 };
 
@@ -206,8 +216,9 @@ const Content = {
 const Record = {
   attempt({ type, id, mode, score, n = 1, diff = 2 }) {
     const s = Store.s;
-    s.attempts.push({ ts: Date.now(), type, id, mode, score: Math.round(score * 1000) / 1000, n, diff });
+    s.attempts.push({ ts: Date.now(), type, id, mode, score: Math.round(score * 1000) / 1000, n, diff: clamp(diff || 2, 2, 4) });
     s.seen[type + ':' + id] = Date.now();
+    Estimator.refreshLevel(type);
     Content.markDone(type, id);
     Store.save();
   },
@@ -232,7 +243,7 @@ function updateBadges() {
 }
 
 /* ---------- Estimation du niveau ---------- */
-const DIFF_CAP = { 1: 0.75, 2: 0.93, 3: 1 };
+const DIFF_CAP = { 1: 0.75, 2: 0.93, 3: 1, 4: 1 }; // 1 = anciennes tentatives B1 ; B2 plafonne à 93 %, C1/C2 comptent plein
 const Estimator = {
   typeStats(type, { windowPts = 60 } = {}) {
     const list = Store.s.attempts.filter((a) => a.type === type).slice().reverse();
@@ -240,7 +251,7 @@ const Estimator = {
     for (const a of list) {
       if (pts >= windowPts) break;
       const rec = Math.pow(0.97, i++);
-      // la difficulté plafonne : 100 % sur des items faciles (B1) ne prouve pas un niveau C1
+      // la difficulté plafonne : 100 % sur des items B2 ne prouve pas un niveau C1
       const adj = a.score * DIFF_CAP[a.diff || 2];
       num += clamp(adj, 0, 1) * a.n * rec; den += a.n * rec; pts += a.n;
     }
@@ -275,14 +286,23 @@ const Estimator = {
     }
     return { band: roundHalf(avg(b)), cont: avg(b), partial: false, sections: b };
   },
-  /* difficultés à privilégier en entraînement pour un type donné */
-  targetDiffs(type) {
-    const st = this.typeStats(type);
-    if (st.acc == null) return [2, 3];
-    if (st.acc < 0.55) return [1, 2];
-    if (st.acc < 0.8) return [2, 3];
-    return [3];
+  /* Niveau courant des séquences pour un type : 2 = B2, 3 = C1.
+     Au départ : auto-évaluation du profil (C1 -> 3, sinon B2). Ensuite il suit ta réussite récente (fenêtre pondérée par la difficulté) :
+     on monte en C1 à partir de la bande 5.0, et on redescend en B2 sous 4.5 (marge pour éviter de zigzaguer). */
+  startLevel(type) {
+    const self = Store.s.profile && Store.s.profile.self && Store.s.profile.self[TYPES[type].sec];
+    return self === 'C1' ? 3 : 2;
   },
+  refreshLevel(type) {
+    const s = Store.s; s.lv = s.lv || {};
+    const st = this.typeStats(type);
+    let lv = s.lv[type] || this.startLevel(type);
+    if (st.acc != null && st.count >= 3) { if (lv === 2 && st.band >= 5) lv = 3; else if (lv === 3 && st.band < 4.5) lv = 2; }
+    s.lv[type] = lv; return lv;
+  },
+  /* tranche de niveaux proposée pour un type : B2 -> [B2, C1, C2] ; C1 -> [C1, C2] */
+  levels(type) { const lv = (Store.s.lv && Store.s.lv[type]) || this.startLevel(type); return lv >= 3 ? [3, 4] : [2, 3, 4]; },
+  levelLabel(type) { return this.levels(type)[0] >= 3 ? 'C1' : 'B2'; },
   targetBand() { return (Store.s.profile && Store.s.profile.targetBand) || 5.5; },
 };
 

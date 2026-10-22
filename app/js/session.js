@@ -95,10 +95,10 @@ function pickForModule(mod, fixed, used, route) {
       chosen = ids.slice(0, n).map((id) => Content.get(type, id)).filter(Boolean);
     }
     if (chosen.length < n) {
-      const diffs = mod.adaptive ? (route === 'upper' ? [3, 2] : [1, 2]) : [1, 2, 3];
+      const diffs = mod.adaptive ? (route === 'upper' ? [3, 4] : [2, 3]) : [2, 3, 4];
       const extra = Content.pick(type, n - chosen.length, { exclude: new Set([...used, ...chosen.map((c) => type + ':' + c.id)]), diffs, allowReserved: !!fixed && !mod.adaptive });
       // pour le module adaptatif : trier par difficulté voulue
-      if (mod.adaptive) extra.sort((a, b) => (route === 'upper' ? (b.diff || 2) - (a.diff || 2) : (a.diff || 2) - (b.diff || 2)));
+      if (mod.adaptive) extra.sort((a, b) => (route === 'upper' ? Content.level(b) - Content.level(a) : Content.level(a) - Content.level(b)));
       chosen = chosen.concat(extra);
     }
     chosen.forEach((c) => { used.add(type + ':' + c.id); out.push({ type, item: c }); });
