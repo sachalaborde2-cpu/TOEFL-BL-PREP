@@ -1,68 +1,68 @@
-/* WRITING (extra bank) — Write an Email (ex001-ex018) + Academic Discussion (dsx001-dsx018). diff : 1 = B1, 2 = B2, 3 = C1 */
+/* WRITING (extra bank) — Write an Email (ex001-ex018) + Academic Discussion (dsx001-dsx018). diff : 2 = B2, 3 = C1 */
 CONTENT.email.push(
-  { id: 'ex001', diff: 1, to: 'Professor Reyes', toAddr: 'Professor Reyes', subj: 'Question about office hours',
+  { id: 'ex001', diff: 2, to: 'Professor Reyes', toAddr: 'Professor Reyes', subj: 'Question about office hours',
     s: 'You are taking an introductory statistics course with Professor Reyes. You did not understand the last chapter on probability, and you would like to talk to her before the quiz next week.',
     t: ['Say who you are and which class you are in', 'Explain what you did not understand', 'Ask when you can meet her'],
     m: `Dear Professor Reyes,
 
-My name is Sacha, and I am in your statistics class on Tuesday and Thursday mornings. I am writing because I have a quiz next week, and I am worried about it.
+My name is Sacha, and I am in your Tuesday and Thursday morning statistics class. I am writing because I am struggling with the chapter on probability, and the quiz is only a week away.
 
-I read the chapter on probability twice, but I still do not understand conditional probability. In particular, I am confused about how to choose the right formula when a problem has two events that depend on each other.
+I have read the chapter twice, yet conditional probability still confuses me. In particular, I cannot work out which formula to apply when two events depend on each other, and the worked examples in the textbook skip several steps.
 
-Would it be possible to meet with you during your office hours this week? I am free on Wednesday afternoon and on Friday morning, so I can come at any time that suits you. If you prefer, I can also send you some of the exercises I have tried so that you can see where I make mistakes.
+Would it be possible to meet during your office hours this week? I am free on Wednesday afternoon and Friday morning, but I can adapt to whatever suits you. If it helps, I could send you the exercises I have attempted beforehand so that you can see exactly where I go wrong.
 
-Thank you very much for your help.
+Thank you very much for your time.
 
 Best regards,
 Sacha`,
-    tips: 'Email simple et efficace : présentation, problème précis (« conditional probability »), disponibilités concrètes. Phrases courtes mais correctes, ton poli.' },
-  { id: 'ex002', diff: 1, to: 'your roommate Alex', toAddr: 'Alex', subj: 'Noise in the apartment',
+    tips: 'Email efficace : présentation, problème précis (« conditional probability »), disponibilités concrètes, proposition utile (envoyer les exercices). Connecteurs variés (yet, in particular, beforehand) et ton poli.' },
+  { id: 'ex002', diff: 2, to: 'your roommate Alex', toAddr: 'Alex', subj: 'Noise in the apartment',
     s: 'You share an apartment with a roommate named Alex. Alex often plays loud music late at night, and you have an important exam next week. You like Alex and do not want to cause a conflict.',
     t: ['Explain the problem politely', 'Describe how it affects you', 'Suggest a solution'],
     m: `Hi Alex,
 
-I hope your week is going well! I wanted to talk to you about something small, and I thought it would be easier to write it down.
+I hope your week is going well. There is something I would like to raise, and I thought it would be easier to put it in writing.
 
-Lately, I have been hearing music from your room quite late, often after midnight. I really do not mind music, and I know you like to relax in the evening, but I have a big exam next week and I am having trouble falling asleep.
+Over the past few weeks, I have often heard music coming from your room well after midnight. I honestly do not mind it, and I know it helps you unwind, but I have a major exam next week and I have been struggling to fall asleep, which is starting to affect my concentration.
 
-Would it be possible to use headphones after 11 p.m., at least until the exam is over? Of course, I can do the same if I am ever making noise. Maybe we could also agree on some quiet hours during exam periods.
+Would you be willing to switch to headphones after 11 p.m., at least until the exam is over? I would be happy to return the favor whenever you have something important coming up, and we could also agree on quiet hours during exam periods.
 
-Thanks so much for understanding, and let me know what you think!
+Thanks so much for understanding. Let me know what you think!
 
 Sacha`,
-    tips: 'Registre amical mais respectueux (« I really do not mind music »), problème + conséquence + solution réciproque. Évite un ton accusateur.' },
-  { id: 'ex003', diff: 1, to: 'the university library staff', toAddr: 'Library Service Desk', subj: 'Lost student card',
+    tips: 'Registre amical mais respectueux (« I honestly do not mind it »), problème + conséquence + solution réciproque (« return the favor »). Évite tout ton accusateur.' },
+  { id: 'ex003', diff: 2, to: 'the university library staff', toAddr: 'Library Service Desk', subj: 'Lost student card',
     s: 'You lost your student card two days ago. You need it to enter the library and to borrow books, and you have an assignment to finish this week.',
     t: ['Explain what happened', 'Say why you need the card quickly', 'Ask how to get a new card'],
     m: `Dear Library Staff,
 
-I am writing because I have lost my student card. I think I left it in a classroom on Monday afternoon, but I looked there the next morning and it was not there.
+I am writing because I lost my student card two days ago. I suspect I left it in a classroom on Monday afternoon, but when I went back the next morning, nobody had handed it in.
 
-I need a replacement quickly because I use the library every day, and I have to finish an important assignment by Friday. Without my card, I cannot enter the building or borrow the books I need for my research.
+I need a replacement as soon as possible, as I rely on the library daily and must hand in a major assignment on Friday. Without the card, I can neither enter the building nor borrow the books that my research depends on.
 
-Could you please tell me how I can get a new card and how much it costs? I would also like to know whether I can use a temporary pass while I wait. My student number is 20458 if you need it.
+Could you please tell me how to apply for a new card and what it costs? I would also like to know whether a temporary pass could be issued in the meantime. My student number is 20458, in case you need it.
 
-Thank you for your help.
+Thank you in advance for your help.
 
 Kind regards,
 Sacha`,
-    tips: 'Trois consignes = trois paragraphes courts. Le numéro étudiant ajoute du réalisme. Vocabulaire simple mais précis (« replacement », « temporary pass »).' },
-  { id: 'ex004', diff: 1, to: 'the president of the photography club', toAddr: 'Photography Club President', subj: 'Joining the photography club',
+    tips: 'Trois consignes = trois paragraphes courts. Le numéro étudiant ajoute du réalisme. Vocabulaire précis (« replacement », « temporary pass », « in the meantime ») et structure « neither… nor ».' },
+  { id: 'ex004', diff: 2, to: 'the president of the photography club', toAddr: 'Photography Club President', subj: 'Joining the photography club',
     s: 'You saw a flyer for the university photography club. You are a beginner, but you would like to join because you enjoy taking pictures of cities and landscapes.',
     t: ['Introduce yourself', 'Explain why you want to join', 'Ask about meetings and costs'],
     m: `Dear President,
 
-My name is Sacha, and I am a second-year business student. I saw your flyer in the student center, and I would love to join the photography club.
+My name is Sacha, and I am a second-year business student. I came across your flyer in the student center, and I would love to join the photography club, even though I am only a beginner.
 
-I have been taking photos for about two years, mostly of cities and landscapes when I travel. I am not an expert, but I want to improve, learn new techniques, and meet other people who like photography. I think a club is the best way to do that.
+I have been taking photos for about two years, mostly of cities and landscapes when I travel. I would like to improve my technique, learn from more experienced members, and meet people who share my passion. A club seems the ideal way to do all three.
 
-Could you tell me when and where the meetings take place? I would also like to know if there is a membership fee, and whether I need a special camera or if my phone is enough at the beginning.
+Could you let me know when and where the meetings take place? I would also like to find out whether there is a membership fee, and whether a smartphone is good enough for the first sessions or whether I should invest in a proper camera.
 
 Thank you, and I hope to see you soon!
 
 Best regards,
 Sacha`,
-    tips: 'Présentation courte, motivation honnête (débutant = pas un problème), questions pratiques précises. Bon niveau de langue B1+.' },
+    tips: 'Présentation courte, motivation honnête (débutant = pas un problème), liste de trois objectifs bien construite, questions pratiques précises (« whether… or whether… »).' },
   { id: 'ex005', diff: 2, to: 'your landlord, Mr. Dawson', toAddr: 'Mr. Dawson', subj: 'Broken washing machine',
     s: 'You rent a small apartment. The washing machine has been leaking water on the bathroom floor for ten days. You already mentioned it to your landlord during a phone call, but nothing has happened.',
     t: ['Describe the problem', 'Remind him of your previous request', 'Suggest a date for the repair'],
@@ -194,7 +194,7 @@ Sacha Laborde`,
   { id: 'ex013', diff: 3, to: 'the Dean of Student Affairs', toAddr: 'Dean of Student Affairs', subj: 'Proposal to extend library hours during exams',
     s: 'During the exam period, the main library closes at 8 p.m., and many students cannot find a quiet place to study afterward. You and several classmates would like the university to extend the opening hours.',
     t: ['Describe the problem', 'Propose a specific change', 'Explain how it could be organized or funded'],
-    m: `Dear Dean Morrison,
+    m: `Dear Dean of Student Affairs,
 
 I am writing on behalf of a group of third-year students to suggest a change that, we believe, would significantly improve our preparation for final exams.
 
@@ -294,31 +294,31 @@ Sacha Laborde`,
 );
 
 CONTENT.disc.push(
-  { id: 'dsx001', diff: 1, course: 'education', prof: 'Professor Adams',
+  { id: 'dsx001', diff: 2, course: 'education', prof: 'Professor Adams',
     q: 'Some schools give students a lot of homework every evening. Others believe that students learn better with little or no homework. Do you think schools should give a lot of homework? Why or why not?',
-    st: [['Emma', 'I think homework is important. It helps students practice what they learned and builds good study habits for the future.'], ['Jack', 'I disagree. After a full day at school, students are tired. They need time to rest, play sports, and spend time with their family.']],
-    m: `I think schools should give homework, but only a small amount. Emma is right that practice helps students remember what they learned, especially in subjects like math or languages. However, Jack makes a good point about rest. If students spend three hours on homework every night, they become tired and stop enjoying school. In my own experience, thirty or forty minutes of homework was enough to review the lesson, and I could still play football with my friends afterward. I would also add that the quality of homework matters more than the quantity. A short exercise that makes you think is more useful than twenty repetitive questions. So schools should choose homework carefully instead of giving a lot of it.`,
-    tips: 'Position claire, concession à Jack, expérience personnelle, idée supplémentaire (qualité > quantité). Langue simple mais correcte, niveau B1+.' },
-  { id: 'dsx002', diff: 1, course: 'health sciences', prof: 'Dr. Moreno',
+    st: [['Emma','I think homework is important. It reinforces what students learned in class and helps them develop good study habits and self-discipline for later in life.'],['Jack','I disagree. After a full day at school, students are exhausted. They need time to rest, play sports, and spend time with their family, and too much homework can make them hate learning.']],
+    m: `I would argue that the amount of homework matters far less than its quality, so I lean toward a modest workload. Emma is right that practice consolidates what was learned in class, particularly in cumulative subjects like mathematics or languages. Jack, however, raises a point that is often overlooked: when students are exhausted, they tend to rush through assignments, and the exercise loses most of its educational value. From my own experience, thirty or forty minutes a night was enough to review the day's lesson, leaving me time to play football and sleep properly. What I would add is that homework should require genuine thinking rather than mechanical repetition. A single well-designed problem that forces you to apply an idea teaches more than twenty identical questions. Schools should therefore assign less homework, but make it more purposeful.`,
+    tips: 'Position nuancée (qualité plutôt que quantité), concession qui reprend les deux étudiants, expérience personnelle, idée nouvelle (devoirs qui font réfléchir). Marqueurs C1 : « I would argue », « is often overlooked », « What I would add ».' },
+  { id: 'dsx002', diff: 2, course: 'health sciences', prof: 'Dr. Moreno',
     q: 'Many universities have gyms and sports facilities, but not all students use them. Should universities require students to take at least one physical activity class each year? Why or why not?',
-    st: [['Sara', 'Yes. Students spend hours sitting in classrooms and libraries. A required sports class would help them stay healthy and reduce stress.'], ['Omar', 'I don\'t think it should be required. Students have different interests and schedules, and some of them already exercise outside the university.']],
-    m: `I partly agree with Sara, but I think the requirement should be flexible. Physical activity is really important for students because we spend so much time sitting, and exercise is known to reduce stress before exams. However, Omar is right that not everyone has the same needs. A student who already trains five times a week would waste time in a compulsory class. A good solution would be to ask every student to do some activity, but to give many choices, such as yoga, dancing, swimming, or even walking clubs. Students who already do sports outside could simply show proof. In this way, the university encourages a healthy lifestyle without forcing people into activities they dislike.`,
-    tips: 'Compromis réaliste (activité obligatoire mais choix libre + justificatif). Connecteurs simples et efficaces (However, In this way).' },
-  { id: 'dsx003', diff: 1, course: 'communication', prof: 'Professor Bell',
+    st: [['Sara','Yes. Students spend hours sitting in classrooms and libraries. A required sports class would help them stay healthy and cope better with stress.'],['Omar','I don\'t think it should be required. Students have different interests, abilities, and schedules, and many already exercise outside the university.']],
+    m: `I am sympathetic to Sara's position, but I think the requirement should be flexible rather than uniform. She is right that students spend most of their day seated, and there is solid evidence that regular exercise lowers stress and improves concentration, which is precisely what exam periods demand. Omar's objection is equally valid, though: a student who already trains five times a week would gain nothing from a compulsory class and might resent the time lost. A sensible compromise would be to require some physical activity each year while offering a broad menu, from yoga and swimming to walking clubs, and allowing students who exercise independently to submit proof. That way, the university promotes healthy habits without forcing anyone into an activity they dislike, which would probably be counterproductive anyway.`,
+    tips: 'Compromis réaliste (activité obligatoire mais choix libre + justificatif). Nuances C1 : « sympathetic to », « equally valid, though », « counterproductive ».' },
+  { id: 'dsx003', diff: 2, course: 'communication', prof: 'Professor Bell',
     q: 'More and more people read the news on social media instead of in newspapers or on news websites. Do you think this is a positive or a negative change? Explain your opinion.',
-    st: [['Lily', 'It\'s positive. News on social media is fast and free, and I can see what is happening in the world in just a few minutes.'], ['Ravi', 'I\'m not sure. A lot of false information spreads on social media, and it is hard to know what to believe.']],
-    m: `I think it is a mixed change, but it is negative if people do not check their sources. Lily is right that social media is fast and convenient, and it reaches young people who would never buy a newspaper. However, as Ravi says, false information spreads very quickly online. For example, during the last election, many of my friends shared a false story just because the title was shocking. Because of this, I believe people should use social media only as a starting point. If a story seems important, they should read about it on a trusted news website. Schools could also teach students how to recognize reliable sources, which is a skill everyone needs today.`,
-    tips: 'Exemple personnel concret, nuance (« starting point »), solution éducative. Bonne structure : opinion, concession, exemple, conclusion.' },
-  { id: 'dsx004', diff: 1, course: 'environmental studies', prof: 'Dr. Green',
+    st: [['Lily','It\'s positive. News on social media is fast and free, and I can find out what is happening in the world within minutes.'],['Ravi','I\'m not sure. A lot of false information spreads on social media, and it\'s hard to tell what to believe.']],
+    m: `On balance, I see it as a mixed development whose outcome depends on how people use it. Lily is right that social media is quick, free, and reaches young people who would never buy a newspaper, which widens the audience for current affairs. Ravi's worry is nonetheless well founded: false stories tend to spread faster than corrections, because shocking headlines get shared before anyone checks them. I have seen friends circulate an obviously misleading article during the last election simply because the title was outrageous. In my view, social media should be treated as a starting point rather than a source: when a story seems important, readers should verify it on a reputable news site. Schools could also teach students how to evaluate sources, a skill that is now as essential as reading itself.`,
+    tips: 'Exemple personnel concret, nuance (« a starting point rather than a source »), solution éducative. Structure : opinion, concession, exemple, recommandation.' },
+  { id: 'dsx004', diff: 2, course: 'environmental studies', prof: 'Dr. Green',
     q: 'Some people say that cities should have more parks and green spaces, even if this means fewer parking spaces or new buildings. Do you agree? Why or why not?',
-    st: [['Nina', 'Yes, parks make cities nicer and healthier. People can relax there, children can play, and trees clean the air.'], ['Paul', 'Cities need housing and parking too. If there are no apartments or parking places, life becomes more expensive and difficult.']],
-    m: `I agree that cities need more green spaces, and I do not think it has to be a choice between parks and housing. Nina is right that parks improve health and well-being. Studies show that people who live near green areas feel less stressed. At the same time, Paul is correct that housing is expensive, so we cannot simply stop building. One solution is to build taller buildings on smaller areas and use the saved land for parks. Another idea is to turn old parking lots into gardens, because with good public transport, many people do not need a car. In my city, a former parking lot became a small park, and now it is always full of students and families. This shows that parks can make a city better for everyone.`,
-    tips: 'Idée constructive qui dépasse le débat (« not a choice between… »), exemple local, vocabulaire clair (green spaces, public transport).' },
+    st: [['Nina','Yes, parks make cities nicer and healthier. People can relax there, children can play, and trees help clean the air.'],['Paul','Cities need housing and parking too. Without enough apartments or parking spaces, life becomes more expensive and more difficult.']],
+    m: `I agree that cities need more green space, and I do not think it has to be an either-or choice between parks and housing. Nina is right that parks improve well-being, and research consistently links access to green areas with lower stress levels. Paul, however, is correct that housing costs are already a burden, so we cannot simply stop building. One way out is to build higher, denser developments on smaller plots and use the land saved for parks. Another is to convert surface parking lots into gardens, which is realistic wherever public transport is good enough to make car ownership optional. In my own city, a former parking lot became a small park and is now crowded with students and families, which suggests that residents value such spaces more than they expect to. Parks and housing are not rivals; with thoughtful planning, they can reinforce each other.`,
+    tips: 'Idée constructive qui dépasse le débat (« either-or choice »), exemple local, solutions concrètes (densité, reconversion de parkings). Conclusion en formule frappante.' },
   { id: 'dsx005', diff: 2, course: 'media studies', prof: 'Professor Cruz',
     q: 'Some people prefer to watch movies at the cinema. Others prefer to watch them at home on streaming platforms. Which do you prefer, and why?',
     st: [['Tara', 'I prefer the cinema. The screen is big, the sound is great, and there are no distractions. It feels like a special experience.'], ['Ben', 'I like streaming at home. It is cheaper, and I can pause the movie, choose any film I want, and watch in comfortable clothes.']],
-    m: `Personally, I prefer the cinema for certain films, but I watch most movies at home. Tara is right that a big screen and good sound make a big difference, especially for action films or science fiction. In those cases, the experience is much stronger than at home. However, Ben has a good point about cost and convenience. A cinema ticket, popcorn, and a drink can cost more than a monthly streaming subscription. Also, at home I can watch a film in two evenings if I am tired. So my choice depends on the type of movie. For big, exciting films, I go to the cinema with friends, and for dramas or documentaries, I stay at home.`,
-    tips: 'Réponse nuancée (« depends on the type of movie »), comparaison coût/confort. Phrases courtes bien enchaînées.' },
+    m: `My preference depends on the film. Tara is right that a big screen and immersive sound transform the experience, especially for spectacle-driven genres like action or science fiction, where the cinema is hard to beat. Ben, however, makes a fair point about cost and convenience: a ticket, popcorn, and a drink can easily exceed a month's streaming subscription, and at home I can pause a film or split it over two evenings when I am tired. So I tend to reserve the cinema for big, visually ambitious releases that I want to share with friends, and I watch dramas and documentaries at home, where subtitles, pauses, and a comfortable sofa actually improve the experience. In short, the two formats are less rivals than complements.`,
+    tips: 'Réponse nuancée (« depends on the film »), comparaison coût/confort, critère de choix clair. Conclusion synthétique (« less rivals than complements »).' },
   { id: 'dsx006', diff: 2, course: 'public policy', prof: 'Dr. Abara',
     q: 'Some countries require young people to complete a period of national service, either military or civilian, such as working in hospitals or environmental projects. Do you think mandatory national service is a good idea? Explain your view.',
     st: [['Isabel', 'I think it would be beneficial. Young people from different backgrounds would meet each other, and they would develop discipline and a sense of responsibility towards society.'], ['Kofi', 'Forcing people to serve is a violation of personal freedom. It also delays their studies and careers, and the people who are not motivated will do a poor job.']],
@@ -342,12 +342,12 @@ CONTENT.disc.push(
   { id: 'dsx010', diff: 2, course: 'energy policy', prof: 'Dr. Haug',
     q: 'Some countries are building more nuclear power plants to reduce carbon emissions. Others are closing them because of safety concerns. Do you think nuclear energy should be part of the solution to climate change? Why or why not?',
     st: [['Felix', 'Yes. Nuclear energy produces almost no carbon, and it provides stable power day and night, unlike solar or wind energy.'], ['Amara', 'The risks are too high. Accidents like Fukushima show what can go wrong, and nobody has found a perfect solution for radioactive waste.']],
-    m: `I think nuclear energy should be part of the transition, mainly because the climate emergency leaves us little time for ideal solutions. Felix is right that nuclear power provides reliable low-carbon electricity, and this is crucial since solar and wind depend on the weather and storage technology is still expensive. Amara's concerns are understandable, but the statistics show that, per unit of energy produced, nuclear power has caused far fewer deaths than coal or gas, which pollute the air every day. As for waste, modern countries store it in deep geological sites, and the volume is surprisingly small compared with other industries. However, nuclear projects are expensive and slow, so I would not rely on them exclusively. The best strategy is to combine renewable energy with existing and carefully regulated nuclear plants, which would allow us to phase out fossil fuels faster.`,
-    tips: 'Argumentation chiffrée (morts par unité d\'énergie), réponse directe aux deux objections, position finale équilibrée. Vocabulaire : « low-carbon », « phase out », « geological sites ».' },
+    m: `I think nuclear energy should be part of the transition, mainly because the climate emergency leaves us little time for ideal solutions. Felix is right that nuclear power provides reliable low-carbon electricity, and this is crucial since solar and wind depend on the weather and storage technology is still expensive. Amara's concerns are understandable, but the statistics show that, per unit of energy produced, nuclear power has caused far fewer deaths than coal or gas, which pollute the air every day. As for waste, the volume is surprisingly small compared with other industries, and it is kept in sealed containers while countries such as Finland build deep underground repositories. However, nuclear projects are expensive and slow, so I would not rely on them exclusively. The best strategy is to combine renewable energy with existing and carefully regulated nuclear plants, which would allow us to phase out fossil fuels faster.`,
+    tips: 'Argumentation chiffrée (morts par unité d\'énergie), réponse directe aux deux objections, position finale équilibrée. Vocabulaire : « low-carbon », « phase out », « underground repositories ».' },
   { id: 'dsx011', diff: 2, course: 'cultural studies', prof: 'Professor Salazar',
     q: 'Many museums charge an entrance fee, while others are free. Some argue that museums should be free for everyone, funded by the government. Others believe that visitors should pay. What is your opinion?',
     st: [['Yuki', 'Museums are part of our common heritage. If they are free, more people, especially students and low-income families, can access culture and education.'], ['Oliver', 'Running a museum is very expensive. If visitors don\'t pay, the money must come from taxes, which means that people who never visit still have to pay.']],
-    m: `I think national museums should be free or very cheap, at least for permanent collections. Yuki is right that access to culture should not depend on income. Research on museums that dropped their fees, such as several in the United Kingdom, shows that visitor numbers increased and attracted more young and diverse audiences. Oliver's point about costs is fair, and it explains why I would keep fees for special exhibitions, which are expensive to organize. This hybrid model would let museums collect revenue from those who want a premium experience, while the permanent collection remains open to all. As for taxpayers who never visit, we already fund libraries, parks, and public education that not everyone uses, because society benefits as a whole. In that sense, free museums are an investment in a more informed and cohesive community.`,
+    m: `I think national museums should be free or very cheap, at least for permanent collections. Yuki is right that access to culture should not depend on income. When several national museums in the United Kingdom dropped their fees in 2001, visitor numbers rose sharply, and many first-time visitors came through the door. Oliver's point about costs is fair, and it explains why I would keep fees for special exhibitions, which are expensive to organize. This hybrid model would let museums collect revenue from those who want a premium experience, while the permanent collection remains open to all. As for taxpayers who never visit, we already fund libraries, parks, and public education that not everyone uses, because society benefits as a whole. In that sense, free museums are an investment in a more informed and cohesive community.`,
     tips: 'Modèle hybride (collections gratuites, expositions payantes), analogie avec les autres services publics pour répondre à Oliver.' },
   { id: 'dsx012', diff: 2, course: 'computer science', prof: 'Dr. Tanaka',
     q: 'Self-driving cars are expected to become common in the next decades. Supporters say they will be safer than human drivers. Critics worry about technical failures and about who is responsible in an accident. Do you think self-driving cars will be a positive development for society?',
@@ -357,7 +357,7 @@ CONTENT.disc.push(
   { id: 'dsx013', diff: 2, course: 'linguistics', prof: 'Professor Ferreira',
     q: 'In many countries, schools require students to study a foreign language, often English. Some people believe that everyone should learn several languages. Others think translation technology makes this unnecessary. What do you think?',
     st: [['Mina', 'Learning languages is still essential. It opens doors to other cultures and jobs, and it trains the brain in ways that translation apps never could.'], ['Pedro', 'With real-time translation on our phones, learning a language takes years for a result that an app can give in seconds. That time could be spent on other subjects.']],
-    m: `I disagree with Pedro, although I understand his argument. Translation tools are excellent for practical situations, such as reading a menu or asking for directions. However, they cannot replace the human connection that comes from speaking someone's language. In business, for example, people tend to trust partners who make the effort to communicate directly, and negotiations rely on subtle nuances and tone that an app often misses. Mina is also right that learning a language benefits the brain; studies suggest that bilingual people are better at switching between tasks. Moreover, depending completely on technology makes us vulnerable, since an app cannot help us during a power cut or in a spontaneous conversation. For these reasons, I think schools should continue to teach languages, but they could use translation tools to focus more on speaking and cultural understanding than on memorizing grammar.`,
+    m: `I disagree with Pedro, although I understand his argument. Translation tools are excellent for practical situations, such as reading a menu or asking for directions. However, they cannot replace the human connection that comes from speaking someone's language. In business, for example, people tend to trust partners who make the effort to communicate directly, and negotiations rely on subtle nuances and tone that an app often misses. Mina is also right that learning a language benefits the brain; some studies suggest that bilingual people are better at switching between tasks. Moreover, depending completely on technology makes us vulnerable, since an app cannot help us during a power cut or in a spontaneous conversation. For these reasons, I think schools should continue to teach languages, but they could use translation tools to focus more on speaking and cultural understanding than on memorizing grammar.`,
     tips: 'Exemple professionnel (négociation), concession à Pedro (utilité pratique), suggestion pédagogique nouvelle. Bon usage de « Moreover », « However ».' },
   { id: 'dsx014', diff: 3, course: 'media studies', prof: 'Dr. Okoye',
     q: 'Some countries are discussing a minimum age of sixteen for using social media platforms. Supporters say this would protect young people. Opponents say it is impossible to enforce and takes away freedom. Do you support a minimum age? Why or why not?',
@@ -377,8 +377,8 @@ CONTENT.disc.push(
   { id: 'dsx017', diff: 3, course: 'cultural heritage', prof: 'Professor Aydin',
     q: 'Many historic neighborhoods face pressure from developers who want to replace old buildings with modern housing or offices. Some argue that cities must preserve their heritage; others say that cities must adapt to the needs of their growing populations. How should cities balance preservation and development?',
     st: [['Sofia', 'Historic buildings are irreplaceable. Once they are demolished, a city loses its identity and its appeal for tourists, and that cannot be recovered.'], ['Mark', 'Cities are living places, not museums. If we protect every old building, housing becomes more expensive, and young people can\'t afford to live in the center.']],
-    m: `I believe the real question is not preservation versus development, but which buildings deserve protection and how we allow them to evolve. Sofia is right that demolished heritage is lost forever, yet Mark's concern about affordability is equally valid, since a city that freezes itself becomes an expensive open-air museum. A balanced approach would rely on adaptive reuse: instead of demolishing old factories, warehouses, or even churches, cities can convert them into housing, offices, or cultural spaces while keeping their facades and structures. Cities such as Bilbao and Rotterdam have shown that this can bring investment and tourism together. At the same time, protection should be selective and based on historical value, rather than automatically applied to every old building. By allowing taller, modern buildings in less sensitive areas, planners can increase housing supply where it causes the least harm to a city's character.`,
-    tips: 'Reformulation de la question (« not X versus Y, but… »), concept précis (adaptive reuse), exemples de villes, protection sélective. Argumentation très C1.' },
+    m: `I believe the real question is not preservation versus development, but which buildings deserve protection and how we allow them to evolve. Sofia is right that demolished heritage is lost forever, yet Mark's concern about affordability is equally valid, since a city that freezes itself becomes an expensive open-air museum. A balanced approach would rely on adaptive reuse: instead of demolishing old factories, warehouses, or even churches, cities can convert them into housing, offices, or cultural spaces while keeping their facades and structures. London's Tate Modern, housed in a former power station, shows that this can bring investment and tourism together. At the same time, protection should be selective and based on historical value, rather than automatically applied to every old building. By allowing taller, modern buildings in less sensitive areas, planners can increase housing supply where it causes the least harm to a city's character.`,
+    tips: 'Reformulation de la question (« not X versus Y, but… »), concept précis (adaptive reuse), exemple concret (Tate Modern), protection sélective. Argumentation très C1.' },
   { id: 'dsx018', diff: 3, course: 'sports management', prof: 'Dr. Eriksen',
     q: 'Governments spend large amounts of public money to host major sporting events such as the Olympic Games or the World Cup. Supporters point to economic benefits and national pride; critics say the money would be better spent elsewhere. Do you think hosting these events is a good use of public funds?',
     st: [['Jamal', 'Yes, in most cases. These events bring tourists, create jobs, and improve infrastructure. They also give citizens a sense of unity and pride.'], ['Elise', 'The costs are usually much higher than predicted, and many stadiums are abandoned afterward. Hospitals and schools are a better investment of public money.']],
